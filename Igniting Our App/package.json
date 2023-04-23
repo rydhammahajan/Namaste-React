@@ -1,0 +1,30 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "Namaste React",
+  
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rydhammahajan/Namaste-React.git"
+  },
+  "author": "Rydham Mahajan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rydhammahajan/Namaste-React/issues"
+  },
+  "homepage": "https://github.com/rydhammahajan/Namaste-React#readme",
+  "devDependencies": {
+    "parcel": "^2.8.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserlist" : [
+    "last 2 versions"
+  ]
+}
