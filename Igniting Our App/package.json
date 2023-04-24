@@ -10,7 +10,7 @@
   "name": "igniting-our-app",
   "version": "1.0.0",
   "description": "Namaste React",
-  "main": "index.js",
+ 
   "scripts": {
     "test": "jest"
   },
