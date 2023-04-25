@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Namaste React",
   "scripts": {
+    "start": "parcel \"Laying Foundation\"/Coding/index.html",
+    "build": "parcel \"Laying Foundation\"/Coding/index.html",
     "test": "jest"
   },
   "repository": {
@@ -16,11 +18,13 @@
   },
   "homepage": "https://github.com/rydhammahajan/Namaste-React#readme",
   "dependencies": {
-    "parcel": "^2.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "parcel": "^2.8.3",
     "process": "^0.11.10"
   }
 }
