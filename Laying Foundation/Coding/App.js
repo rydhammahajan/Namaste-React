@@ -33,7 +33,7 @@ const Introduction = () => {
 
     const num = 3 ; 
     return (
-        <div>                                           
+        <div className="title">                                           
             <h2>This is a Lecture No. : {num}</h2>      
             < LectureName />    {/*This is Component Composition i.e. Nested Components*/}
         </div>
@@ -46,7 +46,7 @@ const mainContainer = (
     <div>
 
         <h1>Namaste React</h1>
-        < Introduction/>
+        <Introduction></Introduction>
         <ul>
             <li>Home</li>
             <li>Support</li>
@@ -57,8 +57,26 @@ const mainContainer = (
 )
 
 
+const HeaderOfPage = () => {
+
+    return (
+    <header className="d-flex justify-content-between " style={{ backgroundColor :"cyan"}}>
+
+    <img src = "https://shorturl.at/CGNR4" className="logo border rounded-pill" style = 
+    {{height:"50px"}}>
+
+    </img>
+    <input type = "text" placeholder="Enter something to serach" style = 
+    {{width:"500px"}}></input>
+    <i class="fa-solid fa-user fs-1"></i>
+    </header>
+    )
+
+}
+
 
 
 const root = ReactDOM.createRoot(document.getElementById("root")) ; 
 
-root.render(mainContainer) ;
+// root.render(mainContainer) ;
+root.render(<HeaderOfPage></HeaderOfPage>) ;
