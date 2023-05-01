@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { restaurantList , IMG_CLOUD_LINK } from "../config";
- 
+import Shimmer from "./Shimmer";
+
 const RestaurantList = ({name , cuisines , cloudinaryImageId}) => {
     
     return (
@@ -18,21 +19,31 @@ const RestaurantList = ({name , cuisines , cloudinaryImageId}) => {
     
 }
 
-function performSearch(inputText , tempRestaurantList) {
-
-    tempRestaurantList = tempRestaurantList.filter((item) => {
-        return item.data.data.name.includes(inputText) ; 
-    })
-    return tempRestaurantList ;
-
+function performSearch(inputText , restaurants) {
+    return restaurants.filter((item) => {
+        return    item.data.data.name.includes(inputText) ; 
+    })        
 }
 
 
 const Body = () => {
 
     const [inputText , setInputText] = useState("") ;
-    let [tempRestaurantList , setTempRestaurantList] = useState(restaurantList) ;
-    let length = tempRestaurantList.length ; 
+    let [allRestaurants , setAllRestaurants] = useState([]) ;
+    let [filteredRestaurants , setFilteredRestaurants] = useState([]) ;
+
+
+    useEffect(()=> {
+        fetchAPIData() ;  
+    } , []) ; 
+
+    async function fetchAPIData(){
+        const data = await fetch(" https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5047063&lng=77.0500089&offset=31&sortBy=RELEVANCE&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING") ; 
+
+        const json = await data.json();
+        setAllRestaurants(json.data.cards);
+        setFilteredRestaurants(json.data.cards)
+    }
 
     return (
 
@@ -51,30 +62,24 @@ const Body = () => {
                 </input>
                 <button className=" p-2 border rounded-1" 
                 onClick={() => {
-                    tempRestaurantList = restaurantList ;
-                    tempRestaurantList = performSearch(inputText , tempRestaurantList) ;
-                    setTempRestaurantList(tempRestaurantList) ;
+                    setFilteredRestaurants(performSearch(inputText , allRestaurants)) ;
                 }}>
                 Search</button>
             </div>
 
                 
+            <div className = "d-flex justify-content-center">
 
-                <div className = "d-flex justify-content-center">
+                
+                (allRestaurants.length !== 0)?
 
-                {
-                    length === 0 ? (
-                    <h6>Oops! No match found for "{inputText}".</h6>
-                    ) : (
                     <div className="d-flex flex-wrap gap-4 justify-content-evenly">
-                        {tempRestaurantList.map((restaurantListItem) => (
-                            <RestaurantList {...restaurantListItem.data.data} />
-                        ))}
-                    </div>
-                    )
-                }
-
-                </div>
+                            {filteredRestaurants.map((restaurantListItem) => (
+                                <RestaurantList {...restaurantListItem.data.data} />
+                            ))} 
+                    </div>  : (<Shimmer/>)
+                
+            </div>
 
         </div>
     )
