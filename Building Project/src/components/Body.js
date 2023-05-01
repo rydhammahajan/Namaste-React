@@ -71,13 +71,13 @@ const Body = () => {
             <div className = "d-flex justify-content-center">
 
                 
-                (allRestaurants.length !== 0)?
+                {(allRestaurants.length !== 0)?
 
                     <div className="d-flex flex-wrap gap-4 justify-content-evenly">
                             {filteredRestaurants.map((restaurantListItem) => (
                                 <RestaurantList {...restaurantListItem.data.data} />
                             ))} 
-                    </div>  : (<Shimmer/>)
+                    </div>  : (<Shimmer/>)}
                 
             </div>
 
