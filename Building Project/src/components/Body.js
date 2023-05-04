@@ -1,5 +1,5 @@
 import { useState , useEffect} from "react";
-import { restaurantList , IMG_CLOUD_LINK } from "../config";
+import {IMG_CLOUD_LINK } from "../config";
 import Shimmer from "./Shimmer";
 
 const RestaurantList = ({name , cuisines , cloudinaryImageId}) => {
@@ -20,8 +20,9 @@ const RestaurantList = ({name , cuisines , cloudinaryImageId}) => {
 }
 
 function performSearch(inputText , restaurants) {
+    if(inputText === "") return restaurants ;
     return restaurants.filter((item) => {
-        return    item.data.data.name.includes(inputText) ; 
+        return    item.data.data.name.toLowerCase().includes(inputText.toLowerCase()   ) ; 
     })        
 }
 
@@ -41,48 +42,56 @@ const Body = () => {
         const data = await fetch(" https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5047063&lng=77.0500089&offset=31&sortBy=RELEVANCE&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING") ; 
 
         const json = await data.json();
+        
         setAllRestaurants(json.data.cards);
         setFilteredRestaurants(json.data.cards)
     }
+    
+    return (<div className="body p-5 d-flex flex-column justify-content-center">
 
-    return (
+            {
 
-        <div className="body p-5">
+                allRestaurants.length === 0 ? (<Shimmer/>) :
 
-            <div className="search-box d-flex justify-content-center p-5">
-                <input 
-                type = "text" 
-                placeholder="Enter something to search ...." 
-                value = {inputText }
-                className="p-2 border rounded-1" 
-                onChange = { (e) => {
-                    setInputText(e.target.value)
-                }}
-                >
-                </input>
-                <button className=" p-2 border rounded-1" 
-                onClick={() => {
-                    setFilteredRestaurants(performSearch(inputText , allRestaurants)) ;
-                }}>
-                Search</button>
-            </div>
+            (
+                <>
+                <div className="search-box d-flex justify-content-center p-5">
+                    <input 
+                    type = "text" 
+                    placeholder="Enter something to search ...." 
+                    value = {inputText }
+                    className="p-2 border rounded-1" 
+                    onChange = { (e) => {
+                        setInputText(e.target.value)
+                    }}
+                    >
+                    </input>
+                    <button className=" p-2 border rounded-1" 
+                    onClick={() => {
+                        setFilteredRestaurants(performSearch(inputText , allRestaurants)) ;
+                    }}>
+                    Search</button>
+                </div>
 
+
+                <div className = "d-flex justify-content-center p-5">
+
+                    {
+                        filteredRestaurants.length === 0 ? <h1>Oops! No Search Result.</h1> :
+
+                        <div className="d-flex flex-wrap gap-4 justify-content-evenly">
+                                {filteredRestaurants.map((restaurantListItem) => (
+                                    <RestaurantList {...restaurantListItem.data.data} />
+                                ))} 
+                        </div>
+                    }
                 
-            <div className = "d-flex justify-content-center">
+                </div>
+            </>
 
-                
-                {(allRestaurants.length !== 0)?
+            )}
 
-                    <div className="d-flex flex-wrap gap-4 justify-content-evenly">
-                            {filteredRestaurants.map((restaurantListItem) => (
-                                <RestaurantList {...restaurantListItem.data.data} />
-                            ))} 
-                    </div>  : (<Shimmer/>)}
-                
-            </div>
-
-        </div>
-    )
+        </div>)
 }
 
 export default Body ; 
