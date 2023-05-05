@@ -4,6 +4,9 @@
     padding : 0 ;
 }
 
+Link div{
+    text-decoration: none;
+}
 /*Header*/
 .nav-bar{
     position : sticky;
@@ -75,19 +78,6 @@
 
 /*Error Component*/
 
-
-.error{
-    height: 400px ;
-    background-image: url("https://cdn.edu.buncee.com/assets/f88812834d0f620b16d85e436aa9f073/animation-science-remotelearning-041420.gif?timestamp=1586899780");
-    background-size: contain;
-    
-}
-.error-statement{
-    color :   rgb(238, 117, 12)  ;
-    font-size: 40px;
-    border : 1px solid rgb(238, 117, 12)  ;
-    border-radius: 10px ;
-}
 .error-button{
     background-color:  rgb(238, 117, 12);
     color : white ; 

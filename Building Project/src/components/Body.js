@@ -1,19 +1,21 @@
 import { useState , useEffect} from "react";
 import {IMG_CLOUD_LINK } from "../config";
 import Shimmer from "./Shimmer";
-
-const RestaurantList = ({name , cuisines , cloudinaryImageId}) => {
+import { Link
+ } from "react-router-dom";
+const RestaurantList = ({name , cuisines , cloudinaryImageId , id}) => {
     
+    console.log(id) ;
     return (
 
-        <div className="d-flex flex-column restaurant-card p-4 gap-3 border">
+        <Link to = {"/restaurant/"+id}><div className="d-flex flex-column restaurant-card p-4 gap-3 border">
 
             <img src = {IMG_CLOUD_LINK + cloudinaryImageId} className = "border rounded-1 border-0"></img>
             <div>
-                <div className="fs-5 h3">{name}</div> 
-                <div className="fs-6">{cuisines.join(", ")}</div> 
+                <div className="fs-5 h3 text-dark">{name}</div> 
+                <div className="fs-6 text-secondary">{cuisines.join(", ")}</div> 
             </div>            
-        </div>
+        </div></Link>
         
     )
     
@@ -42,9 +44,9 @@ const Body = () => {
         const data = await fetch(" https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5047063&lng=77.0500089&offset=31&sortBy=RELEVANCE&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING") ; 
 
         const json = await data.json();
-        
         setAllRestaurants(json.data.cards);
         setFilteredRestaurants(json.data.cards)
+        console.log(json.data.cards) ; 
     }
     
     return (<div className="body p-5 d-flex flex-column justify-content-center">

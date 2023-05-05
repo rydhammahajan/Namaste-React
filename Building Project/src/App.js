@@ -29,10 +29,6 @@ const appRouter = new createBrowserRouter([
                 element :<Body/> ,  
             },
             {
-                path : "/aaaa"  , 
-                element :<Error/> , 
-            },
-            {
                 path : "/restaurant/:resId" , 
                 element :  <RestaurantMenu/>
             }
