@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+import SignUp from "./components/SignUp";
 
 
 
@@ -25,11 +26,11 @@ const appRouter = new createBrowserRouter([
         children : [
 
             {
-                path : "/"  , 
-                element :<Body/> ,  
+                path : ""  , 
+                element :<SignUp/> ,  
             },
             {
-                path : "/restaurant/:resId" , 
+                path : "restaurant/:resId" , 
                 element :  <RestaurantMenu/>
             }
         ]
