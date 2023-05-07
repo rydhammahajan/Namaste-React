@@ -4,9 +4,14 @@
     padding : 0 ;
 }
 
-Link div{
-    text-decoration: none;
+.text-color{
+    color:  rgb(238, 117, 12)  ;
 }
+
+.small-fs{
+    font-size: 15px ;
+}
+
 /*Header*/
 .nav-bar{
     position : sticky;
@@ -26,6 +31,53 @@ Link div{
     color : rgb(238, 117, 12) ;
 }
 
+/*SignUp Section*/
+.signUp-component{
+    height : 100vh;
+    background-image: url("../src/assets/pexels-ella-olsson-1640773.jpg");
+    background-size: cover;
+  
+}
+.signup-image{
+    position: absolute; 
+    height : 550px ;
+    width : 380px ;
+    right : 0px ;
+    border-radius : 10px ;
+
+}
+.signUp-box{
+    background-color: rgba(255, 255, 255 , 1);   
+    border-radius: 20px;
+    width : 800px ;
+    height : 520px ;
+    position: relative;
+}
+
+.submit-button:disabled{
+    background-color: rgb(249, 181, 121) ;
+}
+
+.submit-button{
+    min-height : 50px ;
+    width : 200px ;
+    background-color: rgb(238, 117, 12) ;
+    color: white;
+    border: none; 
+    border-radius: 10px ;
+}
+
+.signUp-input{
+    outline : none ;
+    border : none ;
+    border-bottom: 1px solid  rgb(238, 117, 12) ;
+    width: 300px;
+}
+
+.signUp-input::placeholder{
+    font-size: 16px;
+    color: lightgrey;
+}
 /*RestaurantList*/
 .restaurant-card{
     width : 250px ;
