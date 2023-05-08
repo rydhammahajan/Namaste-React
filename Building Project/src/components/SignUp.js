@@ -1,30 +1,29 @@
 import {useEffect, useState} from "react"
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link} from "react-router-dom";
+const image = require("../assets/side.jpg")
 const SignUp = () => {
 
     let [email , setEmail] = useState(""); 
     let [password , setPassword] = useState("");
     let [confirmPassword , setConfirmPassword] = useState("");
-    let [buttonState  , setButtonState] = useState("false") ;
+    let [buttonState  , setButtonState] = useState(false) ;
     let [isConfirmPasswordValid , setIsConfirmPasswordValid ] = useState(true) ; 
     let [isConfirmPasswordDirty , setIsConfirmPasswordDirty ] = useState(false) ; 
     let [isPasswordDirty , setIsPasswordDirty ] = useState(false) ; 
     let [isEmailDirty , setEmailDirty ] = useState(false) ; 
     let [signUpError , setSignUpError] = useState("") ; 
 
-    const navigate = useNavigate() ; 
+    const navigate = useNavigate() ;  //Navigate Hook
 
     
     function CheckPasswordValidation(){
         if(confirmPassword !== password && isConfirmPasswordDirty) {
             setIsConfirmPasswordValid(false) ; 
-            console.log("Password & Confirm Password should be same") ; 
         }else{
             setIsConfirmPasswordValid(true) ; 
         }
         
     }
-
 
     function CheckFormSubmission() {
         if(email !== "" && password !== "" && password.length >= 8 && password === confirmPassword ) {
@@ -33,7 +32,7 @@ const SignUp = () => {
         return false ; 
     }
 
-    async function SendPostRequest(){
+    async function SendSignUpRequest(){
 
         try{
             const response = await fetch("https://www.melivecode.com/api/users/create", {
@@ -51,14 +50,13 @@ const SignUp = () => {
             })
           }) ;
          const response_json = await response.json() ; 
+
          if(response_json.status === "ok") {
-            console.log("Yayyy!") ; 
             navigate("/") ;
             
          } 
          else{
             setSignUpError(response_json.message)
-            // console.log(response_json.message) ; 
          }
         }catch(error){
             console.log(error) ; 
@@ -68,10 +66,10 @@ const SignUp = () => {
 
     useEffect(()=>{
 
-        if(CheckFormSubmission() === true){
-            setButtonState("true") 
+        if(CheckFormSubmission()){
+            setButtonState(true) 
         }else{
-            setButtonState("false") 
+            setButtonState(false) 
         }
 
     }, [email , confirmPassword , password])
@@ -79,6 +77,7 @@ const SignUp = () => {
     useEffect(() => {
         CheckPasswordValidation() ;
     } , [password , confirmPassword])
+
     return (
 
         <div className="d-flex justify-content-center align-items-center signUp-component">
@@ -86,14 +85,14 @@ const SignUp = () => {
 
             
 
-            <div className="d-flex flex-column p-5 gap-2 signUp-box justify-content-center align-items-between">
+            <div className="d-flex flex-column p-5 gap-2 signUp-box justify-content-around ">
 
-                <img className = "signup-image" src = "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8"/>
+                <img className = "signup-image" src = {image}/>
 
-                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "10px" , right : "70px"}}>
+                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "10px" , right : "40px"}}>
                     <span className="fs-4 text-light h1">Welcome</span>
                     <span className="fs-4 text-light h1">to the planet of</span>
-                    <span className="h1 text-color" style={{fontSize : "40px"}}>Flavour Finders</span>
+                    <span className="h1 text-light" style={{fontSize : "45px"}}>Flavour Finders</span>
                 </div>
 
                 { signUpError != "" ? <div className="text-danger fs-5">SignUp Failed :( <br></br>Looks like this {signUpError} already!</div> : <></>
@@ -142,16 +141,14 @@ const SignUp = () => {
                 
     
 
-                <button className="submit-button fs-3  " disabled={buttonState === "false" ? true : false} 
-                onClick = {() => {SendPostRequest() ;}} type = "submit">Submit</button>
+                <button className="submit-button fs-3  " disabled={!buttonState ? true : false} 
+                onClick = {() => {SendSignUpRequest() ;}} type = "submit">Submit</button>
 
-                <p className="text-color fs-6 h1" >Already an existing user? Login here.</p>
+                <p className="text-color fs-6 h1" >Already an existing user?  <Link to = "/login" className="text-color"><span>Login</span></Link></p>
 
             </div>
-            </div>
-
-       
-
+        </div>
+        
     )
 
 }

@@ -1,4 +1,4 @@
-import Logo from "../assets/Logo.png"
+import Logo from "../assets/logo.png"
 import {Link} from "react-router-dom" 
 const Header = () => {
 
@@ -6,20 +6,20 @@ const Header = () => {
     return (
 
         <div 
-        className='nav-bar d-flex py-1 px-5 justify-content-between overflow-hidden'>
+        className='nav-bar d-flex px-4 justify-content-between overflow-hidden'>
 
-            <img src = {Logo} alt = "logo" style = {{height : "80px" }}/>
+            <Link to = "/" ><img src = {Logo} alt = "logo" style = {{height : "60px" }}/></Link>            
             
             
 
-            <ul className='nav-menu d-flex' style = {{listStyle : "none"}}>
+            <ul className='nav-menu d-flex pt-3 gap-5' style = {{listStyle : "none"}}>
                 
-                <Link to = "/" className='my-3 mx-4'><li>Home</li></Link>
-                <Link to = "/" className='my-3 mx-4'><li>Search</li></Link>
-                <Link to = "/about" className='my-3  mx-4'><li>About Us</li></Link>
-                <Link to = "/" className='my-3  mx-4'><li>Help</li></Link>
-                <Link to = "/" className='my-3  mx-4'><li>Cart</li></Link>
-
+                <Link to = "/" ><li>Home</li></Link>
+                <Link to = "/search" ><li>Search</li></Link>
+                <Link to = "/about" ><li>About Us</li></Link>
+                <Link to = "/" ><li>Help</li></Link>
+                <Link to = "/" ><li>Cart</li></Link>
+                
             </ul>
 
         </div>

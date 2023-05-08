@@ -3,9 +3,15 @@
     margin : 0 ; 
     padding : 0 ;
 }
+body{
+    min-width: 1000px;
+}
 
 .text-color{
     color:  rgb(238, 117, 12)  ;
+}
+.background-color{
+    background-color:  rgb(238, 117, 12)  ;
 }
 
 .small-fs{
@@ -34,7 +40,7 @@
 /*SignUp Section*/
 .signUp-component{
     height : 100vh;
-    background-image: url("../src/assets/pexels-ella-olsson-1640773.jpg");
+    background-image: url("../src/assets/background.jpg");
     background-size: cover;
   
 }
@@ -78,6 +84,37 @@
     font-size: 16px;
     color: lightgrey;
 }
+
+/*Home Page*/
+.home-top{
+    background-image: url("../src/assets/homeBg.jpg");
+    background-size: cover;
+    height : 600px ;
+}
+.explore-button{
+    border: none;
+    border-radius: 10px;
+}
+.explore-button:active{
+    background-color: rgb(234, 155, 86) ;
+}
+.famousRes:hover{
+    scale: 1.2;
+    transition: all ease-in-out 1s;
+    box-shadow : 0px 0px 10px 5px lightgrey
+}
+.text-famousRes{
+    font-size:  40px;
+    font-family: cursive;
+}
+.instaRes{
+    filter: grayscale(100%);
+}
+  
+.instaRes:hover{
+    filter : grayscale(0%)
+}
+
 /*RestaurantList*/
 .restaurant-card{
     width : 250px ;
