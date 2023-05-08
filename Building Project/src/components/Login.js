@@ -66,7 +66,7 @@ const LogIn = () => {
 
     return (
 
-        <div className="d-flex justify-content-center align-items-center signUp-component">
+        <div className="d-flex justify-content-center align-items-center background-component">
 
 
             

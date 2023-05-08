@@ -9,14 +9,14 @@ import Body from "./components/Body";
 import RestaurantMenu from "./components/RestaurantMenu";
 import About from "./components/About"
 import Error from "./components/Error";
-
+import UserInfo from "./components/UserInfo";
 
 
 
 const AppLayout = () => {
     return(
     <>
-        <Header/>
+        {/* <Header/> */}
         <Outlet/>
     </>
 )}
@@ -31,7 +31,7 @@ const appRouter = new createBrowserRouter([
 
             {
                 path : ""  , 
-                element :<Home/> ,  
+                element :<UserInfo/> ,  
             },
             
             {

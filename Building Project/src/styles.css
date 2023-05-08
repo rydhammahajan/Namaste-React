@@ -38,10 +38,11 @@ body{
 }
 
 /*SignUp Section*/
-.signUp-component{
-    height : 100vh;
+.background-component{
+    min-height : 100vh;
     background-image: url("../src/assets/background.jpg");
     background-size: cover;
+    background-attachment: fixed;
   
 }
 .signup-image{
@@ -113,6 +114,21 @@ body{
   
 .instaRes:hover{
     filter : grayscale(0%)
+}
+/**/
+.options{
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    text-align: left;
+}
+.option-container{
+    width: 300px;
+    background-color: white;
+}
+.options:hover{
+    background-color:  rgb(234, 155, 86) ;
+    
 }
 
 /*RestaurantList*/
