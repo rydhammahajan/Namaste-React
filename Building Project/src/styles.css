@@ -61,11 +61,11 @@ body{
     position: relative;
 }
 
-.submit-button:disabled{
+.form-button:disabled{
     background-color: rgb(249, 181, 121) ;
 }
 
-.submit-button{
+.form-button{
     min-height : 50px ;
     width : 200px ;
     background-color: rgb(238, 117, 12) ;
@@ -74,14 +74,14 @@ body{
     border-radius: 10px ;
 }
 
-.signUp-input{
+.form-input{
     outline : none ;
     border : none ;
     border-bottom: 1px solid  rgb(238, 117, 12) ;
     width: 300px;
 }
 
-.signUp-input::placeholder{
+.form-input::placeholder{
     font-size: 16px;
     color: lightgrey;
 }
@@ -129,6 +129,9 @@ body{
 .options:hover{
     background-color:  rgb(234, 155, 86) ;
     
+}
+.user-form{
+    background-color: white;
 }
 
 /*RestaurantList*/

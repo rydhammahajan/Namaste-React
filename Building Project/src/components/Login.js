@@ -1,5 +1,6 @@
 import {useState ,  useEffect} from "react" ; 
 import {Link, useNavigate} from "react-router-dom" ; 
+import { USER_AUTHENTICATE_API } from "../config";
 const image = require("../assets/side.jpg")
 
 
@@ -25,7 +26,7 @@ const LogIn = () => {
     async function SendLogInRequest(){
 
         try{
-            const response = await fetch("https://www.melivecode.com/api/login", {
+            const response = await fetch(USER_AUTHENTICATE_API, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ const LogIn = () => {
                 <h1 className=" text-color ">Login</h1>
 
                 <label className="fs-5 text-secondary">Email Id<br/>
-                    <input className = " mt-1 signUp-input" placeholder="abcd@email.com" type = "email"
+                    <input className = " mt-1 form-input" placeholder="abcd@email.com" type = "email"
                     onChange = {(e)=>{
                         setEmail(e.target.value) 
                         setEmailDirty(true) 
@@ -99,7 +100,7 @@ const LogIn = () => {
                 
 
                 <label className="fs-5 text-secondary">Password<br/>
-                    <input type="password" className = " signUp-input  mt-1"
+                    <input type="password" className = " form-input  mt-1"
                     onChange = {(e)=>{
                         setPassword(e.target.value)
                         setIsPasswordDirty(true) ; 
@@ -115,7 +116,7 @@ const LogIn = () => {
                 
     
 
-                <button className="submit-button fs-3  " disabled={!buttonState ? true : false} 
+                <button className="form-button fs-3  " disabled={!buttonState ? true : false} 
                 onClick = {() => {SendLogInRequest() ;}} type = "submit">Submit</button>
 
                 <p className="text-color fs-6 h1" >A new user?  <Link to = "/signup" className="text-color"><span>SignUp </span></Link></p>

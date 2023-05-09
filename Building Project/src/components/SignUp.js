@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react"
 import { useNavigate , Link} from "react-router-dom";
+import { CREATE_USER_API } from "../config";
 const image = require("../assets/side.jpg")
 const SignUp = () => {
 
@@ -35,7 +36,7 @@ const SignUp = () => {
     async function SendSignUpRequest(){
 
         try{
-            const response = await fetch("https://www.melivecode.com/api/users/create", {
+            const response = await fetch(CREATE_USER_API, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -101,7 +102,7 @@ const SignUp = () => {
                 <h1 className=" text-color ">SignUp</h1>
 
                 <label className="fs-5 text-secondary">Email Id<br/>
-                    <input className = " mt-1 signUp-input" placeholder="abcd@email.com" type = "email"
+                    <input className = " mt-1 form-input" placeholder="abcd@email.com" type = "email"
                     onChange = {(e)=>{
                         setEmail(e.target.value) 
                         setEmailDirty(true) 
@@ -113,7 +114,7 @@ const SignUp = () => {
                 
 
                 <label className="fs-5 text-secondary">Password<br/>
-                    <input type="password" className = " signUp-input  mt-1"
+                    <input type="password" className = " form-input  mt-1"
                     onChange = {(e)=>{
                         setPassword(e.target.value)
                         setIsPasswordDirty(true) ; 
@@ -128,7 +129,7 @@ const SignUp = () => {
                 </label>
 
                 <label className="fs-5 text-secondary">Confirm Password<br/>
-                    <input type="password "  className = " mt-1 signUp-input"
+                    <input type="password "  className = " mt-1 form-input"
                     onChange = {(e)=>{
                         setConfirmPassword(e.target.value) ;
                         setIsConfirmPasswordDirty(true) ; 
@@ -141,7 +142,7 @@ const SignUp = () => {
                 
     
 
-                <button className="submit-button fs-3  " disabled={!buttonState ? true : false} 
+                <button className="form-button fs-3  " disabled={!buttonState ? true : false} 
                 onClick = {() => {SendSignUpRequest() ;}} type = "submit">Submit</button>
 
                 <p className="text-color fs-6 h1" >Already an existing user?  <Link to = "/login" className="text-color"><span>Login</span></Link></p>

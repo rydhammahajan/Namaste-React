@@ -1,4 +1,6 @@
 import { useState } from "react"
+import useGeolocation from "../utils/useGeolocation"
+import { MANUAL_LOOCATION_API } from "../config.js";
 
 const UserInfo = () => {
 
@@ -7,37 +9,29 @@ const UserInfo = () => {
     const [lastName , setLastName] = useState("") ; 
     const [mobile , setMobile] = useState() ; 
     const [recommendedList , setRecommendedList] = useState() ; 
-    const [locationOptionChoose , setLocationOptionChoose] = useState(false)
-    const [hideList , setHideList] = useState(true) ; 
+    const [OptionChoose , setOptionChoose] = useState(0)
 
-    function UseCurrentLocation(){  
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position)=>{ 
-                CurrentLocationAPI(position.coords.latitude , position.coords.longitude) ; 
-            });
-        }
-    }
-    async function CurrentLocationAPI(latitude , longitude) {
 
-        const data = await fetch(`https://www.swiggy.com/mapi/misc/address-recommend?latlng=${latitude}%2C${longitude}`)
+    const latlng = useGeolocation(); 
+    async function CurrentLocationAPI() {
+
+        const data = await fetch(`https://www.swiggy.com/mapi/misc/address-recommend?latlng=${latlng[0]}%2C${latlng[1]}`)
         const json_data = await data.json() ; 
-        console.log(json_data) ;
         setLocation(json_data?.data[0]?.formatted_address);
  
     }
     async function EnterLocationManually(value) {
-        const data = await fetch(`https://www.swiggy.com/mapi/misc/place-autocomplete?input=${value}`)
+        const data = await fetch(MANUAL_LOOCATION_API+value)
         const json_data = await data.json() ; 
         setRecommendedList(json_data.data) ; 
-        console.log(json_data.data) ;
     }
 
-    function SearchButton(data) {
+    function SearchList(data) {
         return ( 
-            <button className = "options m-1"
+            <button className = "options m-1 text-truncate"
             onClick={()=>{
                 setLocation(data) ;
-                setHideList(true) ; 
+                setRecommendedList([]) ; 
             }}>{data}</button> 
         )
     }
@@ -46,12 +40,12 @@ const UserInfo = () => {
 
         <div className="background-component d-flex justify-content-center align-items-center p-5">
 
-            <div className="bg-light d-flex flex-column p-4 gap-5 align-items-center border rounded-1">
+            <div className="user-form d-flex flex-column p-4 gap-5 align-items-center border rounded-1">
 
                 <div className="fs-3 ">Let's get to know you better! </div>
 
                 <label className="fs-5 text-secondary">First Name<br/>
-                    <input className = " mt-1 signUp-input"required
+                    <input className = " mt-1 form-input" required
                     onChange={(e)=>{
                         setFirstName(e.target.value)
                     }}
@@ -59,7 +53,7 @@ const UserInfo = () => {
                 </label>
 
                 <label className="fs-5 text-secondary">Last Name<br/>
-                    <input className = " mt-1 signUp-input"required 
+                    <input className = " mt-1 form-input" required 
                         onChange={(e)=>{
                         setLastName(e.target.value)
                     }}
@@ -67,7 +61,7 @@ const UserInfo = () => {
                 </label>
 
                 <label className="fs-5 text-secondary" type = "tel">Mobile No.<br/>
-                    <input className = " mt-1 signUp-input"required 
+                    <input className = " mt-1 form-input"required 
                         onChange={(e)=>{
                         setMobile(e.target.value)
                     }}
@@ -76,46 +70,48 @@ const UserInfo = () => {
 
                 <label className="fs-5 text-secondary">Location<br/>
 
-                    <input  className = " mt-1 signUp-input" value = {location} required 
-                    disabled={locationOptionChoose ? false : true} 
+                    <input  className = " mt-1 form-input" value = {location} placeholder = "choose one option...." required 
+                    disabled={OptionChoose === 2 ? false : true} 
                     onChange={(e)=> {
 
+                        if(e.target.value === "") setRecommendedList([]);
                         setLocation(e.target.value) ;
                         EnterLocationManually(e.target.value) ; 
-                        setHideList(false) ;
+                        
                     }}
                     /><br/>
                     <div className="d-flex flex-column option-container">
                     
-                    {hideList ? (
+                    {recommendedList?.length < 1 ? (
                         <></>
                     ) : (
                         recommendedList? recommendedList.map((item) => {
-                        return SearchButton(item.description);
+                        return SearchList(item.description);
                         }) : <></>
                     )}
                     
                     </div>
+
                 </label>
+
+
                 <div className="d-flex gap-2">
-                    <button className = "submit-button" 
+                    <button className = "form-button" 
                         onClick={()=>{ 
-                                setLocationOptionChoose(true)
-                                UseCurrentLocation() ;
-                                setHideList(true) ;
+                                CurrentLocationAPI();
                         }}>Use Current Location
                     </button>
-                    <button  className = "submit-button"
+                    <button  className = "form-button"
                     onClick={()=>{ 
                         setLocation("") ; 
-                        setLocationOptionChoose(true)
-                        setHideList(false) ;
+                        setOptionChoose(2)
+                        setRecommendedList([]) ; 
                     }}
                     >Enter Location Manually</button>
                 </div>
                 
 
-                <button className="submit-button fs-3  " >Save</button>
+                <button className="form-button fs-3">Save</button>
                 
             </div>
         </div>

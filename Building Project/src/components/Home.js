@@ -1,38 +1,20 @@
 import { Link } from "react-router-dom";
 import { useState , useEffect} from "react";
+import useIsAuthenticated from "../utils/useIsAuthenticated";
 const Home = () => {
 
-    let [path , setPath] = useState("") ;  
-    async function findPath() {
-        
-        try{
-            const token = localStorage.getItem("accessToken") ;
+    let [path , setPath] = useState("/search") ;  
+    
+    const isAuthenticated = useIsAuthenticated();
 
-            console.log(token) ;
-            const response = await fetch("https://www.melivecode.com/api/auth/user" , {
-                method: 'GET',
-                headers: {
-                    Authorization : `Bearer ${token}`
-                }
-            })
-
-            const response_json = await response.json() ; 
-            console.log(response_json) ;
-            if(response_json.status === "ok"){
-                setPath("/search")
-            }else{
-                setPath("/login")
-            }
-          
-        }catch(error) {
-            console.log(error) ;
+    useEffect(() => {
+        if (isAuthenticated === false) {
+        setPath("/login");
+        } else {
+        setPath("/search");
         }
-    }
-
-    useEffect(()=> {
-        findPath() ; 
-    } , [])
-
+    }, [isAuthenticated]);
+    
     return(
         <>
             <div className="home-top position-relative">

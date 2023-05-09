@@ -4,9 +4,7 @@ import Shimmer from "./Shimmer";
 import { Link
  } from "react-router-dom";
 const RestaurantList = ({name , cuisines , cloudinaryImageId , id}) => {
-    
-    console.log(id) ;
-    return (
+        return (
 
         <Link to = {"/restaurant/"+id}><div className="d-flex flex-column restaurant-card p-4 gap-3 border">
 
@@ -46,7 +44,6 @@ const Body = () => {
         const json = await data.json();
         setAllRestaurants(json.data.cards);
         setFilteredRestaurants(json.data.cards)
-        console.log(json.data.cards) ; 
     }
     
     return (<div className="body p-5 d-flex flex-column justify-content-center">
