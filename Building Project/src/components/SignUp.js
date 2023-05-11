@@ -96,7 +96,7 @@ const SignUp = () => {
                     <span className="h1 text-light" style={{fontSize : "45px"}}>Flavour Finders</span>
                 </div>
 
-                { signUpError != "" ? <div className="text-danger fs-5">SignUp Failed :( <br></br>Looks like this {signUpError} already!</div> : <></>
+                { signUpError != ""  && <div className="text-danger fs-5">SignUp Failed :( <br></br>Looks like this {signUpError} already!</div>
                 }
 
                 <h1 className=" text-color ">SignUp</h1>
@@ -145,10 +145,11 @@ const SignUp = () => {
                 <button className="form-button fs-3  " disabled={!buttonState ? true : false} 
                 onClick = {() => {SendSignUpRequest() ;}} type = "submit">Submit</button>
 
-                <p className="text-color fs-6 h1" >Already an existing user?  <Link to = "/login" className="text-color"><span>Login</span></Link></p>
+                <p className="fs-6 h1" >Already an existing user?  <Link to = "/login" className="text-color"><span>Login</span></Link></p>
 
             </div>
         </div>
+
         
     )
 

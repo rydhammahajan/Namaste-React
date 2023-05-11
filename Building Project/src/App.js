@@ -10,13 +10,14 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import About from "./components/About"
 import Error from "./components/Error";
 import UserInfo from "./components/UserInfo";
+import Help from "./components/Help";
 
 
 
 const AppLayout = () => {
     return(
     <>
-        {/* <Header/> */}
+        <Header/>
         <Outlet/>
     </>
 )}
@@ -31,7 +32,7 @@ const appRouter = new createBrowserRouter([
 
             {
                 path : ""  , 
-                element :<UserInfo/> ,  
+                element :<Home/> ,  
             },
             
             {
@@ -45,6 +46,10 @@ const appRouter = new createBrowserRouter([
             {
                 path : "about" , 
                 element :  <About/>
+            },
+            {
+                path : "/help"  , 
+                element :<Help/> , 
             }
         ]
     },

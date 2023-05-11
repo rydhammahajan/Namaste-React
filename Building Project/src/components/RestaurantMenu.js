@@ -51,13 +51,13 @@ const RestaurantMenu =  () => {
                 <span className="h1 fs-5">Recommended ({recommendedList?.length})</span>
                 <div>
                 {   
-                    !recommendedList ? (<></>) :
+                    recommendedList &&
                     recommendedList.map((item) => {
                         return (<RecommendedList item={item?.card?.info} />)})
                 }
                 </div>
 
-                {!specialComboList ? (<></>) :
+                {     specialComboList &&
                     
                     (<>
                     <span className="h1 fs-5">Special Combos ({specialComboList?.length})</span>

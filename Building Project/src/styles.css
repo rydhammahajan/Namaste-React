@@ -27,7 +27,7 @@ body{
     z-index: 2;
     box-shadow : 0px 0px 10px rgb(211, 211, 211)
 }
-.nav-menu a{
+a{
     text-decoration: none;
 }
 .nav-menu a li{
@@ -115,7 +115,7 @@ body{
 .instaRes:hover{
     filter : grayscale(0%)
 }
-/**/
+/*User Info*/
 .options{
     border: none;
     border-radius: 10px;
@@ -132,6 +132,55 @@ body{
 }
 .user-form{
     background-color: white;
+}
+
+/*Modal*/
+.modal{
+    height: 100vh; 
+    background-color: rgba(211, 211, 211 , 0.5);
+}
+.modal-body{
+    background-color: white;
+    max-width : 500px;
+    border-radius : 10px ;
+}
+.fa-x{
+    right : 30px ; 
+    top : 20px ;
+}
+/*Help section*/
+.faq{
+    background-color: rgb(55,113,142);
+}
+.faq-header{
+    background-color: rgb(55,113,142);
+    z-index : 2 ;
+    width: 100%;
+}
+.faq-body{
+    width : 65% ;
+    border-radius: 20px ;
+    z-index: 1;
+}
+.faq-email{
+    width : 30% ;
+    border-radius: 20px ;
+    position: fixed;
+    right: 50px;
+    z-index: 3;
+}
+.faq-ques{
+    background-color: rgba(211, 211, 211,0.2);
+    border-radius: 10px;
+}
+.faq-ques:hover{
+    color: rgb(238, 117, 12) !important;
+}
+.fa-angle-up{
+    right : 10px ;
+}
+.fa-angle-down{
+    right : 10px ;
 }
 
 /*RestaurantList*/

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import useGeolocation from "../utils/useGeolocation"
 import { MANUAL_LOOCATION_API } from "../config.js";
+import Modal from "./Modal";
 
 const UserInfo = () => {
 
@@ -37,7 +38,8 @@ const UserInfo = () => {
     }
 
     return (
-
+        <>
+        <Modal/>
         <div className="background-component d-flex justify-content-center align-items-center p-5">
 
             <div className="user-form d-flex flex-column p-4 gap-5 align-items-center border rounded-1">
@@ -82,12 +84,10 @@ const UserInfo = () => {
                     /><br/>
                     <div className="d-flex flex-column option-container">
                     
-                    {recommendedList?.length < 1 ? (
-                        <></>
-                    ) : (
-                        recommendedList? recommendedList.map((item) => {
+                    {recommendedList?.length >= 1 && (
+                        recommendedList.map((item) => {
                         return SearchList(item.description);
-                        }) : <></>
+                        })
                     )}
                     
                     </div>
@@ -115,6 +115,7 @@ const UserInfo = () => {
                 
             </div>
         </div>
+        </>
 
     )
 
