@@ -34,9 +34,13 @@ const appRouter = new createBrowserRouter([
                 path : ""  , 
                 element :<Home/> ,  
             },
-            
             {
                 path : "/search"  , 
+                element :<Body/> ,  
+            },
+            
+            {
+                path : "/search/:sortBy"  , 
                 element :<Body/> ,  
             },
             {

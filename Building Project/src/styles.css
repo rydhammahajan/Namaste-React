@@ -184,12 +184,21 @@ a{
 }
 
 /*RestaurantList*/
+
 .restaurant-card{
-    width : 250px ;
-    height : 350px ;
+    width: 300px;
 }
 .restaurant-card:hover{
     box-shadow : 0px 0px 10px 5px lightgrey
+}
+.restaurant-card:hover > .quick-menu{
+    display: inline-block;
+}
+.brown-text{
+    color: brown ;
+}
+.quick-menu{
+    display: none;
 }
 .search-box input{
     height : 50px ;
