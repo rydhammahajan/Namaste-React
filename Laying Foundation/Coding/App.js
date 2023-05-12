@@ -68,7 +68,7 @@ const HeaderOfPage = () => {
     </img>
     <input type = "text" placeholder="Enter something to serach" style = 
     {{width:"500px"}}></input>
-    <i class="fa-solid fa-user fs-1"></i>
+    <i className="fa-solid fa-user fs-1"></i>
     </header>
     )
 

@@ -36,12 +36,12 @@ const RestaurantMenu =  () => {
 
             <div className="d-flex gap-5 fs-3 p-3 menu-header-detail border">
                     <span>
-                        <i class="fa-solid fa-clock"></i>
+                        <i className="fa-solid fa-clock"></i>
                         <span className="h1 fs-3"> {sla?.slaString}</span>
                     </span>
 
                     <span>
-                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                        <i className="fa-solid fa-indian-rupee-sign"></i>
                         <span className="h1 fs-3"> {costForTwoMessage.slice(1)}</span>
                     </span>
             </div>

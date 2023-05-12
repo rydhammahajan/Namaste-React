@@ -6,7 +6,7 @@ const Header = () => {
     return (
 
         <div 
-        className='nav-bar d-flex px-4 justify-content-between overflow-hidden'>
+        className='nav-bar d-flex px-4 justify-content-between'>
 
             <Link to = "/" ><img src = {Logo} alt = "logo" style = {{height : "60px" }}/></Link>            
             

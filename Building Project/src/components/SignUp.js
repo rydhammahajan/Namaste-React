@@ -86,9 +86,9 @@ const SignUp = () => {
 
             
 
-            <div className="d-flex flex-column p-5 gap-2 signUp-box justify-content-around ">
+            <div className="d-flex flex-column p-5 gap-2 signup-login-box justify-content-around ">
 
-                <img className = "signup-image" src = {image}/>
+                <img className = "signup-login-right-side" src = {image}/>
 
                 <div className="d-flex flex-column position-absolute  p-3 " style={{top : "10px" , right : "40px"}}>
                     <span className="fs-4 text-light h1">Welcome</span>

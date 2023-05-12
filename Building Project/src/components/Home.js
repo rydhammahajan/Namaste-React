@@ -27,9 +27,9 @@ const Home = () => {
                 </div>
 
             </div>
-            <div className="d-flex flex-column pt-5 px-3 ">
+            <div className="d-flex flex-column pt-5 px-3  ">
                 <h1 className="text-famousRes">World Famous Restaurants</h1>
-                <div className="d-flex gap-5 p-5">
+                <div className="d-flex gap-5 p-5 flex-wrap justify-content-center">
                 <img src = {require("../assets/famousRes1.avif")} className="famousRes" height={"200px"}></img>
                 <img src = {require("../assets/famousRes2.avif")} className="famousRes" height={"200px"}></img>
                 <img src = {require("../assets/famousRes3.avif")} className="famousRes" height={"200px"}></img>
