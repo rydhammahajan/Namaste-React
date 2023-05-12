@@ -13,11 +13,11 @@ const RestaurantMenu =  () => {
         
     return !restaurantData ? (<Shimmer/>) : 
     (
-        <div className="m-5 p-5 border border-success ">
+        <div className="p-5 d-flex flex-column gap-5 align-items-center">
 
-            <div className="d-flex p-3 justify-content-between border">
+            <div className="d-flex p-3 justify-content-between  restaurant-menu-header">
 
-                <div className="d-flex flex-column justify-content-center gap-1">
+                <div className="d-flex flex-column justify-content-center gap-1 ">
                     <span className="h1 fs-3">{name}</span>
 
                     <span className="text-secondary">{areaName}, {sla?.lastMileTravelString}</span>
@@ -34,7 +34,7 @@ const RestaurantMenu =  () => {
                 <img src = {IMG_CLOUD_LINK+ cloudinaryImageId} />
             </div>
 
-            <div className="d-flex gap-5 fs-3 p-3 menu-header-detail border">
+            <div className="d-flex gap-5 fs-3 p-3 menu-header-detail  restaurant-menu-price justify-content-around ">
                     <span>
                         <i className="fa-solid fa-clock"></i>
                         <span className="h1 fs-3"> {sla?.slaString}</span>
@@ -46,22 +46,27 @@ const RestaurantMenu =  () => {
                     </span>
             </div>
 
-            <div className="d-flex flex-column p-3 m-5 border gap-5">
+            <div className="d-flex flex-column p-3  align-items-center">
                 
-                <span className="h1 fs-5">Recommended ({recommendedList?.length})</span>
-                <div>
                 {   
                     recommendedList &&
-                    recommendedList.map((item) => {
-                        return (<RecommendedList item={item?.card?.info} />)})
+                    (<>
+                        <span className="h1 fs-3">Recommended ({recommendedList?.length})</span>
+                        <div className="d-flex flex-column  align-items-center" >
+                        {   
+                            recommendedList.map((item) => {
+                            return <RecommendedList item={item?.card?.info} />})
+                        }
+                        </div>
+                        </>
+                    )
                 }
-                </div>
 
                 {     specialComboList &&
                     
                     (<>
-                    <span className="h1 fs-5">Special Combos ({specialComboList?.length})</span>
-                    <div>
+                    <span className="h1 fs-3">Special Combos ({specialComboList?.length})</span>
+                    <div className="d-flex flex-column  align-items-center">
                     {
                         specialComboList.map((item)=>{
                         return (<SpecialComboList item={item?.card?.info} />)})

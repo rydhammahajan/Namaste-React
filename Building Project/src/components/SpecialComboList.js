@@ -1,7 +1,7 @@
 const SpecialComboList = ({item}) =>{
         const {isVeg , name , price , description} = item || {} ; 
         return (
-            <div className="d-flex py-3 px-5 justify-content-between border">
+            <div className="d-flex py-3 px-5 justify-content-between  restaurant-menu-section my-4">
 
                 <div className="d-flex flex-column justify-content-center gap-1">
 

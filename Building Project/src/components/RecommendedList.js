@@ -3,9 +3,9 @@ const RecommendedList = ({item}) => {
     
     const {isVeg , name , price , description , imageId} = item || {}; 
     return (
-        <div className="d-flex py-3 px-5 justify-content-between border">
+        <div className="d-flex py-3 px-5 justify-content-between restaurant-menu-section my-4 gap-5">
 
-            <div className="d-flex flex-column justify-content-center gap-1">
+            <div className="d-flex flex-column justify-content-center ">
 
             {(isVeg !== 1)? (<img src="https://img.icons8.com/color/48/null/non-vegetarian-food-symbol.png" height={"30px"} width={"30px"}/ >) : (<img src="https://img.icons8.com/color/48/null/vegetarian-food-symbol.png" height={"30px"} width={"30px"}/>
             )}
@@ -18,8 +18,8 @@ const RecommendedList = ({item}) => {
                 </span>
 
             </div>
-            <img src = {IMG_CLOUD_LINK+ imageId
-            } height={"100px"}/>
+            <img src = {imageId ? IMG_CLOUD_LINK+ imageId
+            : ""} height={"100px"}/>
         </div>
     )
 }

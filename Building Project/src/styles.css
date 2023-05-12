@@ -240,6 +240,21 @@ a{
 .search-box button:active{
     background-color :rgba(238, 117, 12,0.9);
 }
+/*Restaurant Menu*/
+.restaurant-menu-header{
+    box-shadow: 0 0 10px lightgrey;
+    border-radius: 10px;
+    width : 70%;
+}
+.restaurant-menu-price{
+    width : 70%;
+    box-shadow: 0 0 10px lightgrey;
+}
+.restaurant-menu-section{
+    width : 60%;
+    box-shadow: 0 0 10px lightgrey;
+}
+
 
 /* Shimmer Component*/
 .shimmer-animation{
