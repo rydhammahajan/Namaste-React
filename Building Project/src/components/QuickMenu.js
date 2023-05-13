@@ -22,7 +22,8 @@ const QuickMenu = ({id}) => {
 
             <h5>Quick Menu</h5>
 
-            <div className="d-flex flex-wrap gap-2 justify-content-around">
+            <div className="d-flex flex-wrap gap-2 justify-content-around" style={{backgroundColor
+            : "white"}}>
             {
                 data.map((item)=>{
                     return dispalyMenu(item) ; 

@@ -202,12 +202,13 @@ a{
 .quick-menu-component{
     position : absolute ; 
     bottom : 0px ; 
-    left : -250px ;
+    left : 0px ;
     height: 400px;
-    width: 350px;    
+    width: 300px;    
     visibility: hidden;
     background-color: white ;
     box-shadow: 0 0 10px lightgray;
+    z-index: 2;
 }
 .quick-menu-text:hover{
     color:rgb(238, 117, 12) ;
@@ -220,8 +221,8 @@ a{
 
 .quick-menu-text:hover ~ .quick-menu-component , .quick-menu-component:hover{ 
     visibility: visible;
-    transform: translateX(-70);
-    transition: transform ease-in-out 0.5s ;    
+    transform: translateY(-60);
+    transition: transform ease-in-out 1s ;    
 }
 
 /*Search Box*/
