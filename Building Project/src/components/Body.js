@@ -2,6 +2,7 @@ import { useState , useEffect} from "react";
 import Shimmer from "./Shimmer";
 import RestaurantCard from "./RestaurantCard";
 import { Link, useParams } from "react-router-dom";
+import Carousel from "./Carousel";
 
 
 
@@ -41,6 +42,8 @@ const Body = () => {
 
             (
                 <>
+
+                <Carousel/>
                 
                 <div className="filter-section border-bottom  d-flex justify-content-between p-3 ">
                     

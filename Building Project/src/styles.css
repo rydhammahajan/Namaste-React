@@ -179,6 +179,10 @@ a{
     right : 10px ;
 }
 
+/*Carousel*/
+.carousel-group {
+    background-color: white;
+}
 /*RestaurantList*/
 .restaurant-card{
     width: 300px;
@@ -229,6 +233,7 @@ a{
 .search-box input:focus{
     outline: none;
 }
+
 .search-box button{
     height : 50px ;
     width : 100px ;
@@ -251,7 +256,7 @@ a{
     box-shadow: 0 0 10px lightgrey;
 }
 .restaurant-menu-section{
-    width : 60%;
+    width : 1000px;
     box-shadow: 0 0 10px lightgrey;
 }
 
