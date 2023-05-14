@@ -52,6 +52,8 @@ const SignUp = () => {
           }) ;
          const response_json = await response.json() ; 
 
+         console.log(response_json) ; 
+
          if(response_json.status === "ok") {
             navigate("/") ;
             

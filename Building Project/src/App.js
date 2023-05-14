@@ -49,7 +49,7 @@ const appRouter = new createBrowserRouter([
             },
             {
                 path : "about" , 
-                element :  <About/>
+                element :  <UserInfo/>
             },
             {
                 path : "/help"  , 

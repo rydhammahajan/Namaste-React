@@ -2,8 +2,8 @@ import { useState } from "react"
 import useGeolocation from "../utils/useGeolocation"
 import { MANUAL_LOOCATION_API } from "../config.js";
 import Modal from "./Modal";
-
 const UserInfo = () => {
+
 
     const [location , setLocation] = useState("") ; 
     const [firstName , setFirstName] = useState("") ; 
@@ -12,15 +12,14 @@ const UserInfo = () => {
     const [recommendedList , setRecommendedList] = useState() ; 
     const [OptionChoose , setOptionChoose] = useState(0)
 
-
     const latlng = useGeolocation(); 
     async function CurrentLocationAPI() {
 
         const data = await fetch(`https://www.swiggy.com/mapi/misc/address-recommend?latlng=${latlng[0]}%2C${latlng[1]}`)
         const json_data = await data.json() ; 
-        setLocation(json_data?.data[0]?.formatted_address);
- 
+        setLocation(json_data?.data[0]?.formatted_address);  
     }
+
     async function EnterLocationManually(value) {
         const data = await fetch(MANUAL_LOOCATION_API+value)
         const json_data = await data.json() ; 
@@ -47,7 +46,7 @@ const UserInfo = () => {
                 <div className="fs-3 ">Let's get to know you better! </div>
 
                 <label className="fs-5 text-secondary">First Name<br/>
-                    <input className = " mt-1 form-input" required
+                    <input className = " mt-1 form-input"  required
                     onChange={(e)=>{
                         setFirstName(e.target.value)
                     }}
@@ -101,6 +100,8 @@ const UserInfo = () => {
                                 CurrentLocationAPI();
                         }}>Use Current Location
                     </button>
+
+
                     <button  className = "form-button"
                     onClick={()=>{ 
                         setLocation("") ; 
