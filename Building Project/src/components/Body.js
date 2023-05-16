@@ -3,7 +3,11 @@ import Shimmer from "./Shimmer";
 import RestaurantCard from "./RestaurantCard";
 import { Link, useParams } from "react-router-dom";
 import Carousel from "./Carousel";
-
+import { useContext } from "react";
+import LocationContext from "../utils/LocationContext";
+import UserInfo from "./UserInfo";
+import useIsAuthenticated from "../utils/useIsAuthenticated.js";
+import { useNavigate } from "react-router-dom";
 
 
 function performSearch(inputText , restaurants) {
@@ -20,28 +24,38 @@ const Body = () => {
     let [allRestaurants , setAllRestaurants] = useState([]) ;
     let [filteredRestaurants , setFilteredRestaurants] = useState([]) ;
     let [sortAnswer , setSortAnswer] = useState(useParams().sortBy);
-
-
+    const {locationCoords , locationModal} = useContext(LocationContext) ; 
+    const navigate = useNavigate() ;
+    
     useEffect(()=> {
         fetchAPIData() ;  
-    } , [sortAnswer]) ; 
+    } , [sortAnswer , locationCoords]) ; 
+
+    const {isAuthenticated} = useIsAuthenticated() ; 
+
+    useEffect(()=>{ 
+        if(isAuthenticated === false) navigate("/login") ;
+    } , [isAuthenticated])
 
     async function fetchAPIData(){
-        const data = await fetch(`https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5047063&lng=77.0500089&sortBy=${sortAnswer ? sortAnswer : "RELEVANCE"}&offset=10&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING`) ; 
+        const data = await fetch(`https://www.swiggy.com/dapi/restaurants/list/v5?lat=${locationCoords.lat}&lng=${locationCoords.long}&sortBy=${sortAnswer ? sortAnswer : "RELEVANCE"}&offset=10&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING`) ; 
 
         const json = await data.json();
         setAllRestaurants(json.data.cards);
         setFilteredRestaurants(json.data.cards)
     }
     
-    return (<div className="body p-5 d-flex flex-column justify-content-center">
+    return ( 
+        <div className="body p-5 d-flex flex-column justify-content-center">
 
             {
 
-                allRestaurants.length === 0 ? (<Shimmer/>) :
+                allRestaurants?.length === 0 ? (<Shimmer/>) :
 
             (
                 <>
+
+                {locationModal.display  && <UserInfo/>}
 
                 <Carousel/>
                 
@@ -103,10 +117,10 @@ const Body = () => {
                 <div className = "d-flex justify-content-center p-5">
 
                     {
-                        filteredRestaurants.length === 0 ? <h1>Oops! No Search Result.</h1> :
+                        filteredRestaurants?.length === 0 ? <h1>Oops! No Search Result.</h1> :
 
                         <div className="d-flex flex-wrap gap-5 justify-content-evenly">
-                                {filteredRestaurants.map((restaurantListItem) => (
+                                {filteredRestaurants?.map((restaurantListItem) => (
                                     <RestaurantCard {...restaurantListItem.data.data} />
                                 ))} 
                         </div>
@@ -117,7 +131,8 @@ const Body = () => {
 
             )}
 
-        </div>)
+        </div>
+        )
 }
 
 export default Body ; 

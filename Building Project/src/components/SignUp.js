@@ -4,6 +4,8 @@ import { CREATE_USER_API } from "../config";
 const image = require("../assets/side.jpg")
 const SignUp = () => {
 
+    const [firstName , setFirstName] = useState("") ; 
+    const [lastName , setLastName] = useState("") ; 
     let [email , setEmail] = useState(""); 
     let [password , setPassword] = useState("");
     let [confirmPassword , setConfirmPassword] = useState("");
@@ -42,8 +44,8 @@ const SignUp = () => {
                 'Content-Type': 'application/json'
               },
             body: JSON.stringify({
-              fname : 'null',
-              lname : 'null',
+              fname : firstName,
+              lname : lastName,
               username :email , 
               password : password,
               email : email , 
@@ -55,7 +57,7 @@ const SignUp = () => {
          console.log(response_json) ; 
 
          if(response_json.status === "ok") {
-            navigate("/") ;
+            navigate("/login") ;
             
          } 
          else{
@@ -92,7 +94,7 @@ const SignUp = () => {
 
                 <img className = "signup-login-right-side" src = {image}/>
 
-                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "10px" , right : "40px"}}>
+                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "50px" , right : "40px"}}>
                     <span className="fs-4 text-light h1">Welcome</span>
                     <span className="fs-4 text-light h1">to the planet of</span>
                     <span className="h1 text-light" style={{fontSize : "45px"}}>Flavour Finders</span>
@@ -102,6 +104,22 @@ const SignUp = () => {
                 }
 
                 <h1 className=" text-color ">SignUp</h1>
+
+                <label className="fs-5 text-secondary">First Name<br/>
+                    <input className = " mt-1 form-input"  required
+                    onChange={(e)=>{
+                        setFirstName(e.target.value)
+                    }}
+                    />
+                </label>
+            
+                <label className="fs-5 text-secondary">Last Name<br/>
+                    <input className = " mt-1 form-input" required 
+                        onChange={(e)=>{
+                        setLastName(e.target.value)
+                    }}
+                    />
+                </label>
 
                 <label className="fs-5 text-secondary">Email Id<br/>
                     <input className = " mt-1 form-input" placeholder="abcd@email.com" type = "email"

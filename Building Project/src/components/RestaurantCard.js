@@ -1,14 +1,24 @@
-import { Link } from "react-router-dom"
+import { Link , useNavigate } from "react-router-dom"
 import {IMG_CLOUD_LINK } from "../config.js";
 import QuickMenu from "./QuickMenu.js";
+import useIsAuthenticated from "../utils/useIsAuthenticated.js";
+import { useEffect } from "react";
 
 const RestaurantCard= ({name , cuisines , cloudinaryImageId , id , avgRating
     , deliveryTime, costForTwo , aggregatedDiscountInfo
 }) => {
 
+        const {isAuthenticated} = useIsAuthenticated() ;
+        const navigate = useNavigate();
+
+        useEffect(()=>{
+
+            if(isAuthenticated === false) navigate("/login") ; 
+        })
+
         return (
 
-        <Link to = {"/restaurant/"+id }>
+        <Link to = {"/restaurant/"+id } >
         <div className="d-flex flex-column restaurant-card p-3  text-secondary position-relative" key = {id} >
 
             <img src = {cloudinaryImageId !== ""? IMG_CLOUD_LINK + cloudinaryImageId : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrPVk2P2G9HzLbp-t_E-iaSJ9awZ65hdqSWNx_KF1cMWYLXyZQO9YorVUMChw77s8f-2M&usqp=CAU"}  alt = {name} height={"180px"} width={"260px"}></img>
@@ -36,7 +46,7 @@ const RestaurantCard= ({name , cuisines , cloudinaryImageId , id , avgRating
                     <hr className="text-secondary"/>
                     Quick Menu
                 </div>  
-                <QuickMenu id = {id}/>
+                <QuickMenu id = {id} />
 
             </div>
 

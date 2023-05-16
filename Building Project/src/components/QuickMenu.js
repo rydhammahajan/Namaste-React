@@ -18,14 +18,14 @@ const QuickMenu = ({id}) => {
     const data = useQuickMenu(id)?.slice(0 ,6);
     return(
         data &&
-        <div className="d-flex flex-column align-items-center quick-menu-component rounded-1 p-3 gap-3" key = {id}>
+        <div className="d-flex flex-column align-items-center quick-menu-component rounded-1 p-3 gap-3">
 
             <h5>Quick Menu</h5>
 
             <div className="d-flex flex-wrap gap-2 justify-content-around" style={{backgroundColor
             : "white"}}>
             {
-                data.map((item)=>{
+                data?.map((item)=>{
                     return dispalyMenu(item) ; 
                  })
             }

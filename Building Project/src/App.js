@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter ,  Outlet , RouterProvider } from "react-router-dom";
 import Header from "./components/Header";
@@ -11,14 +11,30 @@ import About from "./components/About"
 import Error from "./components/Error";
 import UserInfo from "./components/UserInfo";
 import Help from "./components/Help";
+import Profile from "./components/Profile";
+import LocationContext from "./utils/LocationContext";
 
 
-
+ 
 const AppLayout = () => {
+    const [locationCoords , setLocationCoords] = useState({ 
+        lat:28.5047063, 
+        long : 77.0500089 
+    }) ;
+    const [location, setLocation] = useState({
+        locationName : "" 
+    }) ; 
+    const [locationModal , setLocationModal]  = useState({
+        display : true
+    })
     return(
     <>
-        <Header/>
-        <Outlet/>
+            <LocationContext.Provider value={{locationCoords : locationCoords , setLocationCoords : setLocationCoords , location : location, setLocation : setLocation , locationModal : locationModal , setLocationModal : setLocationModal} }>
+
+                <Header/>
+                <Outlet/>
+
+            </LocationContext.Provider>
     </>
 )}
 
@@ -49,11 +65,18 @@ const appRouter = new createBrowserRouter([
             },
             {
                 path : "about" , 
-                element :  <UserInfo/>
+                element :  <About/>
             },
             {
                 path : "/help"  , 
                 element :<Help/> , 
+            },
+            {
+                path : "/location"  , 
+                element :<UserInfo/> , 
+            },{
+                path : "/profile" , 
+                element : <Profile/>
             }
         ]
     },

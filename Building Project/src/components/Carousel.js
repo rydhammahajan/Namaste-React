@@ -2,21 +2,18 @@ import { useEffect } from "react";
 
 const Carousel = ()=> {
 
-    function carouselSettings(){
+    useEffect(()=>{
 
-        
         let dom_caraousel = document.querySelector(".carousel") ; 
-
-        setInterval(()=>{
+        let id = setInterval(()=>{
             const elements = document.querySelectorAll(".carousel-group") ;
             dom_caraousel.removeChild(elements[0]) ;
             dom_caraousel.appendChild(elements[0]) ;
         }  , 2500)
 
-    }
-
-    useEffect(()=>{
-        carouselSettings();
+        return () => {
+            clearInterval(id);
+        };
     } , [])
     return (
     

@@ -2,14 +2,12 @@ import { useState  , useEffect} from "react";
 
 const useIsAuthenticated = () => {
 
-    const [isAuthenticated , setIsAuthenticated] = useState(false) ; 
+    const [isAuthenticated , setIsAuthenticated] = useState(null) ; 
 
     async function Check() {
         
         try{
-            const token = localStorage.getItem("accessToken") ;
-
-            console.log(token) ;
+            const token = await JSON.parse(localStorage.getItem("USER"))?.accessToken;
             const response = await fetch("https://www.melivecode.com/api/auth/user" , {
                 method: 'GET',
                 headers: {
@@ -18,7 +16,6 @@ const useIsAuthenticated = () => {
             })
 
             const response_json = await response.json() ; 
-            console.log(response_json) ;
             if(response_json.status === "ok"){
                 setIsAuthenticated(true)
             }else{
@@ -29,13 +26,21 @@ const useIsAuthenticated = () => {
             setIsAuthenticated(false) ;
             console.log(error) ;
         }
+
+
     }
 
     useEffect(()=> {
         Check() ; 
-    }, [])
+    } , [])
 
-    return isAuthenticated ; 
+    const logout = () => {
+        localStorage.removeItem("USER");
+        setIsAuthenticated(false);
+      };
+    
+      return { isAuthenticated, logout , setIsAuthenticated };
+     
 
 }
 

@@ -1,6 +1,7 @@
 import {useState ,  useEffect} from "react" ; 
 import {Link, useNavigate} from "react-router-dom" ; 
 import { USER_AUTHENTICATE_API } from "../config";
+import useIsAuthenticated from "../utils/useIsAuthenticated";
 const image = require("../assets/side.jpg")
 
 
@@ -12,8 +13,15 @@ const LogIn = () => {
     let [isPasswordDirty , setIsPasswordDirty ] = useState(false) ; 
     let [isEmailDirty , setEmailDirty ] = useState(false) ; 
     let [logInError , setLogInError] = useState("") ; 
+    const {isAuthenticated , setIsAuthenticated} = useIsAuthenticated() ; 
 
     const navigate = useNavigate() ;  //Navigate Hook
+
+    useEffect(() => {
+        if (isAuthenticated === true) {
+          navigate("/");
+        }
+    }, [isAuthenticated]);
 
 
     function CheckFormSubmission() {
@@ -39,13 +47,14 @@ const LogIn = () => {
           }) ;
          const response_json = await response.json() ; 
 
-         console.log(response_json);
-
+         console.log(response_json) ;
          if(response_json.status === "ok") {
-
-            localStorage.setItem("accessToken" , response_json.accessToken) ;  
-            navigate("/") ;
-            
+           
+            localStorage.setItem('USER', JSON.stringify({
+                ...response_json.user,
+                accessToken: response_json.accessToken
+            }));
+            setIsAuthenticated(true) ;            
          } 
          else{
             setLogInError(response_json.message)
@@ -84,7 +93,7 @@ const LogIn = () => {
                     <span className="h1 text-light" style={{fontSize : "45px"}}>Flavour Finders</span>
                 </div>
 
-                { logInError != "" && <div className="text-danger fs-5">{logInError} :( <br></br>Looks like this user doesn't exist!</div> 
+                { logInError != "" && <div className="text-danger fs-5">{logInError} :( <br></br>email and/or password not valid</div> 
                 }
 
                 <h1 className=" text-color ">Login</h1>
@@ -94,6 +103,7 @@ const LogIn = () => {
                     onChange = {(e)=>{
                         setEmail(e.target.value) 
                         setEmailDirty(true) 
+                        setLogInError("")
                     }} required />
                     {
                         isEmailDirty && email === "" ? <p className="text-danger small-fs">*Email is required</p> :<p></p>  
@@ -106,6 +116,7 @@ const LogIn = () => {
                     onChange = {(e)=>{
                         setPassword(e.target.value)
                         setIsPasswordDirty(true) ; 
+                        setLogInError("")
                     }} 
 
                     required/>

@@ -5,7 +5,6 @@ const Help = () => {
 
     const [visibleAccordian , setVisibleAccordian] = useState() ; 
     const questions = useFAQ() ; 
-    console.log(questions) ; 
 
     return (
 

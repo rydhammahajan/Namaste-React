@@ -5,7 +5,7 @@ const Home = () => {
 
     let [path , setPath] = useState("/search") ;  
     
-    const isAuthenticated = useIsAuthenticated();
+    const {isAuthenticated }= useIsAuthenticated();
 
     useEffect(() => {
         if (isAuthenticated === false) {

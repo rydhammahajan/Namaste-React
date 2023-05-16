@@ -1,122 +1,134 @@
 import { useState } from "react"
 import useGeolocation from "../utils/useGeolocation"
 import { MANUAL_LOOCATION_API } from "../config.js";
-import Modal from "./Modal";
+import { useContext  } from "react";
+import LocationContext from "../utils/LocationContext";
+import { useNavigate } from "react-router-dom";
+
 const UserInfo = () => {
 
-
-    const [location , setLocation] = useState("") ; 
-    const [firstName , setFirstName] = useState("") ; 
-    const [lastName , setLastName] = useState("") ; 
-    const [mobile , setMobile] = useState() ; 
     const [recommendedList , setRecommendedList] = useState() ; 
     const [OptionChoose , setOptionChoose] = useState(0)
+    const {setLocationCoords} = useContext(LocationContext) ; 
+    const {location  , setLocation , setLocationModal} = useContext(LocationContext) ; 
+    const [input , setInput] = useState(location.locationName) ; 
+    const navigate = useNavigate() ;
+    
 
     const latlng = useGeolocation(); 
+
+
     async function CurrentLocationAPI() {
 
         const data = await fetch(`https://www.swiggy.com/mapi/misc/address-recommend?latlng=${latlng[0]}%2C${latlng[1]}`)
-        const json_data = await data.json() ; 
-        setLocation(json_data?.data[0]?.formatted_address);  
+        const json_data = await data.json() ;
+
+        setInput(json_data?.data[0]?.formatted_address) ;
+        setLocationCoords({
+            lat : latlng[0] , 
+            long : latlng[1] 
+        })
+        setOptionChoose(1) ;
     }
 
     async function EnterLocationManually(value) {
         const data = await fetch(MANUAL_LOOCATION_API+value)
-        const json_data = await data.json() ; 
-        setRecommendedList(json_data.data) ; 
+            const json_data = await data.json() ; 
+            setRecommendedList(json_data.data) ;
     }
 
     function SearchList(data) {
         return ( 
             <button className = "options m-1 text-truncate"
             onClick={()=>{
-                setLocation(data) ;
+                setInput(data) ; 
                 setRecommendedList([]) ; 
+                setOptionChoose(1) ;
             }}>{data}</button> 
         )
     }
 
+    function SaveLocation(){
+    
+        setLocation({
+            locationName : input
+        });
+        setLocationModal({
+            display : false}) ; 
+        navigate("/search")
+    }
+
     return (
-        <>
-        <Modal/>
-        <div className="background-component d-flex justify-content-center align-items-center p-5">
 
-            <div className="user-form d-flex flex-column p-4 gap-5 align-items-center border rounded-1">
+        <div className="position-fixed top-0 start-0" style={{zIndex : 2}}>
+            <div className="location-background d-flex justify-content-center align-items-center p-5">
 
-                <div className="fs-3 ">Let's get to know you better! </div>
+                <div className="user-form d-flex flex-column p-4 gap-5 align-items-center border rounded-1 ">
 
-                <label className="fs-5 text-secondary">First Name<br/>
-                    <input className = " mt-1 form-input"  required
-                    onChange={(e)=>{
-                        setFirstName(e.target.value)
-                    }}
-                    />
-                </label>
+                    <div className="fs-3 text-dark">Help us Locate You! </div>
 
-                <label className="fs-5 text-secondary">Last Name<br/>
-                    <input className = " mt-1 form-input" required 
-                        onChange={(e)=>{
-                        setLastName(e.target.value)
-                    }}
-                    />
-                </label>
 
-                <label className="fs-5 text-secondary" type = "tel">Mobile No.<br/>
-                    <input className = " mt-1 form-input"required 
-                        onChange={(e)=>{
-                        setMobile(e.target.value)
-                    }}
-                    />
-                </label>
+                    <label className="fs-5 text-secondary">Location<br/>
 
-                <label className="fs-5 text-secondary">Location<br/>
+                        <input  className = " mt-1 px-2 form-input" value = {input} placeholder = "Choose one option...." required 
+                        disabled={OptionChoose === 2 ? false : true} 
+                        onChange={(e)=> {
 
-                    <input  className = " mt-1 form-input" value = {location} placeholder = "choose one option...." required 
-                    disabled={OptionChoose === 2 ? false : true} 
-                    onChange={(e)=> {
+                            
+                            if(e.target.value === "") {
+                                setInput("") ; 
+                                setRecommendedList([]);
+                            }
+                            else{
+                                setInput(e.target.value) ; 
+                                EnterLocationManually(e.target.value) ; 
+                            }
+                            
+                        }}
+                        /><br/>
 
-                        if(e.target.value === "") setRecommendedList([]);
-                        setLocation(e.target.value) ;
-                        EnterLocationManually(e.target.value) ; 
+                        <div className="d-flex flex-column option-container">
                         
-                    }}
-                    /><br/>
-                    <div className="d-flex flex-column option-container">
-                    
-                    {recommendedList?.length >= 1 && (
-                        recommendedList.map((item) => {
-                        return SearchList(item.description);
-                        })
-                    )}
-                    
-                    </div>
+                        {recommendedList?.length >= 1 && (
+                            recommendedList.map((item) => {
+                            return SearchList(item.description);
+                            })
+                        )}
+                        
+                        </div>
 
-                </label>
+                    </label>
 
 
-                <div className="d-flex gap-2">
-                    <button className = "form-button" 
+                    <div className="d-flex gap-2">
+                        <button className = "form-button" 
+                            onClick={()=>{ 
+                                    CurrentLocationAPI();
+                                    setOptionChoose(0) ; 
+                            }}>Use Current Location
+                        </button>
+
+
+                        <button  className = "form-button"
                         onClick={()=>{ 
-                                CurrentLocationAPI();
-                        }}>Use Current Location
-                    </button>
+                            setInput("") ;
+                            setOptionChoose(2)
+                            setRecommendedList([]) ; 
+                        }}
+                        >Enter Location Manually</button>
+                    </div>
+                    
 
-
-                    <button  className = "form-button"
-                    onClick={()=>{ 
-                        setLocation("") ; 
-                        setOptionChoose(2)
-                        setRecommendedList([]) ; 
+                    <button className="form-button fs-3 " disabled =
+                    { OptionChoose === 1 ?  false : true }
+                    onClick= {()=>{
+                        SaveLocation() ; 
                     }}
-                    >Enter Location Manually</button>
+                    >Save</button>
+                    
                 </div>
-                
-
-                <button className="form-button fs-3">Save</button>
-                
             </div>
         </div>
-        </>
 
     )
 

@@ -10,6 +10,8 @@ const RestaurantMenu =  () => {
     const {resId} = useParams(); 
     const {restaurantData , recommendedList , specialComboList} = useRestaurantMenu(resId) ; 
     const {name , areaName , sla , cuisines , avgRatingString , cloudinaryImageId , costForTwoMessage} = restaurantData?.cards[0]?.card?.card?.info || {} ;
+
+    
         
     return !restaurantData ? (<Shimmer/>) : 
     (

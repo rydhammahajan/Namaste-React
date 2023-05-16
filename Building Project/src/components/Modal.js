@@ -11,10 +11,12 @@ const Modal = () => {
                 <i className="fa-solid fa-x position-absolute" onClick={()=>{
                     setModalDisplay(false) ; 
                 }}></i>
+
                 <h1 className="text-color">Awesome Job!</h1>
                 <img src = {require("../assets/verifiedGif.gif")} height = "100px"/>
-                <span className="fs-5">Your profile has been successfully updated</span>
-                <span className="fs-5"> We're excited to have you on board🥳 </span>
+                <span className="fs-5">Your Location has been successfully updated</span>
+                <span className="fs-5"> We're excited to deliver food at your door🥳 </span>
+
                 
             </div>
         </div>
