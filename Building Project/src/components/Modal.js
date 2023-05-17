@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useContext} from "react";
+import ModalContext from "../utils/ModalContext";  
+
+
 
 const Modal = () => {
 
-    [modalDisplay , setModalDisplay] = useState(true) ;
+    const {modal , setModal} = useContext(ModalContext) ;
 
     return (
 
-         modalDisplay && <div className="modal d-flex align-items-center justify-content-center position-fixed">
+         <div className="modal d-flex align-items-center justify-content-center position-fixed">
             <div className="d-flex flex-column justify-content-center align-items-center p-5 modal-body position-relative">
                 <i className="fa-solid fa-x position-absolute" onClick={()=>{
-                    setModalDisplay(false) ; 
+                    setModal({
+                        ...modal ,
+                        display : false
+                    }) ; 
                 }}></i>
 
                 <h1 className="text-color">Awesome Job!</h1>
@@ -24,6 +30,3 @@ const Modal = () => {
     )
 }
 export default Modal ; 
-
-
-

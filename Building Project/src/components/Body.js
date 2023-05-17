@@ -5,10 +5,11 @@ import { Link, useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import { useContext } from "react";
 import LocationContext from "../utils/LocationContext";
-import UserInfo from "./UserInfo";
+import Location from "./Location";
 import useIsAuthenticated from "../utils/useIsAuthenticated.js";
 import { useNavigate } from "react-router-dom";
-
+import ModalContext from "../utils/ModalContext";  
+import Modal from "./Modal";
 
 function performSearch(inputText , restaurants) {
     if(inputText === "") return restaurants ;
@@ -25,13 +26,17 @@ const Body = () => {
     let [filteredRestaurants , setFilteredRestaurants] = useState([]) ;
     let [sortAnswer , setSortAnswer] = useState(useParams().sortBy);
     const {locationCoords , locationModal} = useContext(LocationContext) ; 
+    const {isAuthenticated} = useIsAuthenticated() ; 
+    const {modal} = useContext(ModalContext) ;
     const navigate = useNavigate() ;
+
+    console.log(locationModal) ;
     
     useEffect(()=> {
         fetchAPIData() ;  
     } , [sortAnswer , locationCoords]) ; 
 
-    const {isAuthenticated} = useIsAuthenticated() ; 
+    
 
     useEffect(()=>{ 
         if(isAuthenticated === false) navigate("/login") ;
@@ -55,7 +60,8 @@ const Body = () => {
             (
                 <>
 
-                {locationModal.display  && <UserInfo/>}
+                {locationModal.display  && <Location/> }
+                {modal.name === "afterLocation" && modal.display === true && <Modal/>}
 
                 <Carousel/>
                 
@@ -66,26 +72,33 @@ const Body = () => {
 
                         <Link to = '/search/RELEVANCE' className="text-dark" key = "relevance" onClick = {()=>{
                             setSortAnswer("RELEVANCE")
+                            setInputText("") ;
+
                         }}><span className = {sortAnswer === "RELEVANCE" ? "border-bottom border-dark" : undefined}  >Relevance</span></Link>
 
                         <Link to = '/search/DELIVERY_TIME'  className="text-dark" key = "delivery" onClick = {()=>{
                             setSortAnswer("DELIVERY_TIME")
+                            setInputText("") ;
                         }}><span className = {sortAnswer === "DELIVERY_TIME" ? "border-bottom border-dark" : undefined}>Delivery Time</span></Link>
 
                         <Link to = '/search/RATING'  className="text-dark" key = "rating" onClick = {()=>{
                             setSortAnswer("RATING")
+                            setInputText("") ;
                         }}><span className = {sortAnswer === "RATING" ?"border-bottom border-dark" : undefined}>Rating</span></Link>
 
                         <Link to = '/search/COST_FOR_TWO'  className="text-dark" key = "lowCost" onClick = {()=>{
                             setSortAnswer("COST_FOR_TWO");
+                            setInputText("") ;
                         }}><span className = {sortAnswer === "COST_FOR_TWO" ? "border-bottom border-dark" : undefined}>Cost: Low To High</span></Link>
 
                         <Link to = '/search/COST_FOR_TWO_H2L' className="text-dark"  key = "highCost" onClick = {()=>{
-                            setSortAnswer("COST_FOR_TWO_H2L")
+                            setSortAnswer("COST_FOR_TWO_H2L");
+                            setInputText("") ;
                         }}><span className = {sortAnswer === "COST_FOR_TWO_H2L" ? "border-bottom border-dark" : undefined}>Cost: High To Low</span></Link>
 
                         <Link to = "/search"  onClick={()=>{
                             setSortAnswer("");
+                            setInputText("") ;
                         }}><span className="text-color"><i className="fa-solid fa-filter" ></i>Clear Filters</span></Link>
 
                     </div>

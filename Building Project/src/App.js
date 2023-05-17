@@ -9,31 +9,52 @@ import Body from "./components/Body";
 import RestaurantMenu from "./components/RestaurantMenu";
 import About from "./components/About"
 import Error from "./components/Error";
-import UserInfo from "./components/UserInfo";
+import Location from "./components/Location";
 import Help from "./components/Help";
 import Profile from "./components/Profile";
 import LocationContext from "./utils/LocationContext";
+import UserContext from "./utils/UserContext";
+import ModalContext from "./utils/ModalContext";
 
 
  
 const AppLayout = () => {
+
+    const data = JSON.parse(localStorage.getItem("USER")) ; 
+
     const [locationCoords , setLocationCoords] = useState({ 
         lat:28.5047063, 
         long : 77.0500089 
     }) ;
+
     const [location, setLocation] = useState({
         locationName : "" 
     }) ; 
+
     const [locationModal , setLocationModal]  = useState({
         display : true
-    })
+    });
+
+    const [user , setUser] = useState({
+        fname : data ?.fname , 
+        lname : data?.lname , 
+        email : data ?.email
+    }) ; 
+
+    const [modal , setModal] = useState({}) ; 
+   
     return(
     <>
             <LocationContext.Provider value={{locationCoords : locationCoords , setLocationCoords : setLocationCoords , location : location, setLocation : setLocation , locationModal : locationModal , setLocationModal : setLocationModal} }>
+            <UserContext.Provider value = {{user : user , setUser: setUser}}>
+
+            <ModalContext.Provider value = {{modal : modal  , setModal : setModal}}> 
 
                 <Header/>
                 <Outlet/>
 
+            </ModalContext.Provider>
+            </UserContext.Provider>
             </LocationContext.Provider>
     </>
 )}
@@ -70,13 +91,6 @@ const appRouter = new createBrowserRouter([
             {
                 path : "/help"  , 
                 element :<Help/> , 
-            },
-            {
-                path : "/location"  , 
-                element :<UserInfo/> , 
-            },{
-                path : "/profile" , 
-                element : <Profile/>
             }
         ]
     },

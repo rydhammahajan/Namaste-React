@@ -3,10 +3,13 @@ import {Link} from "react-router-dom"
 import LocationContext from "../utils/LocationContext"
 import { useContext, useEffect, useState } from "react"
 import useIsAuthenticated from "../utils/useIsAuthenticated"
+import UserContext from "../utils/UserContext"
 const Header = () => {
 
     const {location } = useContext(LocationContext) ; 
+    const {fname , lname} = useContext(UserContext).user ; 
     const{ isAuthenticated , logout} = useIsAuthenticated() ;
+    
     
 
     return (
@@ -23,7 +26,7 @@ const Header = () => {
                     <div className = "text-truncate d-inline-block" style={{maxWidth : "200px"}}>{location.locationName} </div>
                     </>
                 }
-                
+                <div>Welcome! {fname + lname}</div>
 
 
             </div>          
@@ -32,7 +35,6 @@ const Header = () => {
                 
                 <Link to = "/" ><li>Home</li></Link>
                 <Link to = "/search" ><li>Restaurants</li></Link>
-                <Link to = "/location" ><li>Location</li></Link>
                 <Link to = "/about" ><li>About Us</li></Link>
                 <Link to = "/help" ><li>Help</li></Link>
                 <Link to = "/" ><li>Cart</li></Link>
