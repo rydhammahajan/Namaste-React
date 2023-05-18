@@ -1,22 +1,24 @@
-import {useEffect, useState} from "react"
-import { useNavigate , Link} from "react-router-dom";
+import {useEffect, useState , useContext} from "react"
+import {Link} from "react-router-dom";
 import { CREATE_USER_API } from "../config";
+import ModalContext from "../utils/ModalContext";
+import Modal from "./Modal";
+
 const image = require("../assets/side.jpg")
 const SignUp = () => {
 
     const [firstName , setFirstName] = useState("") ; 
     const [lastName , setLastName] = useState("") ; 
-    let [email , setEmail] = useState(""); 
-    let [password , setPassword] = useState("");
-    let [confirmPassword , setConfirmPassword] = useState("");
-    let [buttonState  , setButtonState] = useState(false) ;
-    let [isConfirmPasswordValid , setIsConfirmPasswordValid ] = useState(true) ; 
-    let [isConfirmPasswordDirty , setIsConfirmPasswordDirty ] = useState(false) ; 
-    let [isPasswordDirty , setIsPasswordDirty ] = useState(false) ; 
-    let [isEmailDirty , setEmailDirty ] = useState(false) ; 
-    let [signUpError , setSignUpError] = useState("") ; 
-
-    const navigate = useNavigate() ;  //Navigate Hook
+    const [email , setEmail] = useState(""); 
+    const [password , setPassword] = useState("");
+    const [confirmPassword , setConfirmPassword] = useState("");
+    const [buttonState  , setButtonState] = useState(false) ;
+    const [isConfirmPasswordValid , setIsConfirmPasswordValid ] = useState(true) ; 
+    const [isConfirmPasswordDirty , setIsConfirmPasswordDirty ] = useState(false) ; 
+    const [isPasswordDirty , setIsPasswordDirty ] = useState(false) ; 
+    const [isEmailDirty , setEmailDirty ] = useState(false) ; 
+    const [signUpError , setSignUpError] = useState("") ; 
+    const {modal , setModal} = useContext(ModalContext) ; 
 
     
     function CheckPasswordValidation(){
@@ -57,7 +59,16 @@ const SignUp = () => {
          console.log(response_json) ; 
 
          if(response_json.status === "ok") {
-            navigate("/login") ;
+            setModal({
+
+                ...modal ,
+                name : "afterSignUp" , 
+                heading : "Welcome",
+                message : "Account Created Successfully!" , 
+                description : "Complete next steps to start ordering food❤️" , 
+                navigate : "/login" , 
+                display : true 
+            })
             
          } 
          else{
@@ -85,23 +96,22 @@ const SignUp = () => {
 
     return (
 
+        <>
+        {modal.name === "afterSignUp" && modal.display === true && <Modal/>} 
         <div className="d-flex justify-content-center align-items-center background-component">
 
 
             
 
-            <div className="d-flex flex-column p-5 gap-2 signup-login-box justify-content-around ">
+            <div className="d-flex flex-column p-5 m-5 gap-2 signup-login-box justify-content-around ">
 
                 <img className = "signup-login-right-side" src = {image}/>
 
-                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "50px" , right : "40px"}}>
+                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "70px" , right : "40px"}}>
                     <span className="fs-4 text-light h1">Welcome</span>
                     <span className="fs-4 text-light h1">to the planet of</span>
                     <span className="h1 text-light" style={{fontSize : "45px"}}>Flavour Finders</span>
                 </div>
-
-                { signUpError != ""  && <div className="text-danger fs-5">SignUp Failed :( <br></br>Looks like this {signUpError} already!</div>
-                }
 
                 <h1 className=" text-color ">SignUp</h1>
 
@@ -109,6 +119,7 @@ const SignUp = () => {
                     <input className = " mt-1 form-input"  required
                     onChange={(e)=>{
                         setFirstName(e.target.value)
+                        setSignUpError("") ; 
                     }}
                     />
                 </label>
@@ -117,6 +128,7 @@ const SignUp = () => {
                     <input className = " mt-1 form-input" required 
                         onChange={(e)=>{
                         setLastName(e.target.value)
+                        setSignUpError("") ; 
                     }}
                     />
                 </label>
@@ -126,6 +138,7 @@ const SignUp = () => {
                     onChange = {(e)=>{
                         setEmail(e.target.value) 
                         setEmailDirty(true) 
+                        setSignUpError("") ; 
                     }} required />
                     {
                         isEmailDirty && email === "" ? <p className="text-danger small-fs">*Email is required</p> :<p></p>  
@@ -138,6 +151,7 @@ const SignUp = () => {
                     onChange = {(e)=>{
                         setPassword(e.target.value)
                         setIsPasswordDirty(true) ; 
+                        setSignUpError("") ; 
                     }} 
 
                     required/>
@@ -153,6 +167,7 @@ const SignUp = () => {
                     onChange = {(e)=>{
                         setConfirmPassword(e.target.value) ;
                         setIsConfirmPasswordDirty(true) ; 
+                        setSignUpError("") ; 
                     }}
                     required/>
                     {
@@ -160,6 +175,8 @@ const SignUp = () => {
                     }
                 </label>
                 
+                { signUpError != ""  && <div className="text-danger fs-5">SignUp Failed !<br></br>Looks like this {signUpError} already!</div>
+                }
     
 
                 <button className="form-button fs-3  " disabled={!buttonState ? true : false} 
@@ -169,6 +186,7 @@ const SignUp = () => {
 
             </div>
         </div>
+        </>
 
         
     )

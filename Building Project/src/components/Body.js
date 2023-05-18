@@ -60,8 +60,8 @@ const Body = () => {
             (
                 <>
 
-                {locationModal.display  && <Location/> }
-                {modal.name === "afterLocation" && modal.display === true && <Modal/>}
+                {/* {locationModal.display  && <Location/> }
+                {modal.name === "afterLocation" && modal.display === true && <Modal/>} */}
 
                 <Carousel/>
                 

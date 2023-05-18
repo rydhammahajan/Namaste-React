@@ -1,35 +1,37 @@
-import Logo from "../assets/logo.png"
+import { useContext, useEffect, useState} from "react"
 import {Link} from "react-router-dom" 
+import Logo from "../assets/logo.png"
 import LocationContext from "../utils/LocationContext"
-import { useContext, useEffect, useState } from "react"
 import useIsAuthenticated from "../utils/useIsAuthenticated"
-import UserContext from "../utils/UserContext"
+import LogIn from "./LogIn"
 const Header = () => {
 
     const {location } = useContext(LocationContext) ; 
-    const {fname , lname} = useContext(UserContext).user ; 
-    const{ isAuthenticated , logout} = useIsAuthenticated() ;
-    
-    
+    const {isAuthenticated , logout} = useIsAuthenticated()
 
+    useEffect(() => {
+        console.log(isAuthenticated);
+      }, [isAuthenticated]);
+    
+    // if (isAuthenticated === false) {
+    // return <></>;
+    // }
+    
     return (
-
-        isAuthenticated  && 
+ 
         <div 
         className='nav-bar d-flex px-4 justify-content-between py-2'>
            
-            <div>
+            <div className="d-flex gap-3">
                 <Link to = "/" ><img src = {Logo} alt = "logo" style = {{height : "60px" }}/></Link> 
                 {location.locationName !== "" &&
                     <>
-                    <i class="fa-solid fa-location-dot pt-3 ms-5 me-3 fs-3 text-color"></i> 
-                    <div className = "text-truncate d-inline-block" style={{maxWidth : "200px"}}>{location.locationName} </div>
+                    <i class="fa-solid fa-location-dot pt-3 ms-5  fs-3 text-color"></i> 
+                    <div className = "text-truncate d-inline-block pt-3" style={{maxWidth : "200px"}}>{location.locationName} </div>
                     </>
                 }
-                <div>Welcome! {fname + lname}</div>
 
-
-            </div>          
+            </div>
 
            <ul className='nav-menu d-flex pt-3 gap-5' style = {{listStyle : "none"}}>
                 
@@ -39,12 +41,13 @@ const Header = () => {
                 <Link to = "/help" ><li>Help</li></Link>
                 <Link to = "/" ><li>Cart</li></Link>
                 <Link to = "/profile" ><li>Profile</li></Link>
-                <Link to = "/" className="text-color" onClick={()=>{
-                    logout() ; 
-                }}>
 
-                    LogOut
-                </Link>
+                {
+                    isAuthenticated === true  ? <button className="text-color border-0 px-3 bg-light rounded-1" onClick={()=>{
+                    logout() ; }}>LogOut</button> : 
+                    <button className="text-color border-0 px-3 bg-light rounded-1"><Link to = "/login" className="text-color">LogIn</Link></button>
+                }
+                
                 
             </ul>
             

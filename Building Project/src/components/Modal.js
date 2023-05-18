@@ -1,4 +1,5 @@
 import { useContext} from "react";
+import { useNavigate } from "react-router-dom";
 import ModalContext from "../utils/ModalContext";  
 
 
@@ -6,6 +7,8 @@ import ModalContext from "../utils/ModalContext";
 const Modal = () => {
 
     const {modal , setModal} = useContext(ModalContext) ;
+    const navigate = useNavigate() ;
+
 
     return (
 
@@ -14,14 +17,16 @@ const Modal = () => {
                 <i className="fa-solid fa-x position-absolute" onClick={()=>{
                     setModal({
                         ...modal ,
-                        display : false
+                        display : false , 
+                        name : "" 
                     }) ; 
+                    if(modal.navigate !== "")navigate(modal.navigate) ; 
                 }}></i>
 
-                <h1 className="text-color">Awesome Job!</h1>
+                <h1 className="text-color">{modal.heading}</h1>
                 <img src = {require("../assets/verifiedGif.gif")} height = "100px"/>
-                <span className="fs-5">Your Location has been successfully updated</span>
-                <span className="fs-5"> We're excited to deliver food at your door🥳 </span>
+                <span className="fs-5">{modal.message !== "" && modal.message}</span>
+                <span className="fs-5"> {modal.description !== "" && modal.description} </span>
 
                 
             </div>

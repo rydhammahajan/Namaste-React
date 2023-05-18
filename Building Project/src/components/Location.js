@@ -1,7 +1,6 @@
-import { useState } from "react"
+import { useState , useContext} from "react"
 import useGeolocation from "../utils/useGeolocation"
 import { MANUAL_LOOCATION_API } from "../config.js";
-import { useContext  } from "react";
 import LocationContext from "../utils/LocationContext";
 import ModalContext from "../utils/ModalContext";
 
@@ -57,13 +56,18 @@ const Location = () => {
             ...modal  ,
             name : "afterLocation" , 
             display : true , 
+            heading : "Awesome Job!",
+            message : "Your Location has been successfully updated !" , 
+            description : "We're excited to deliver food at your door🥳" , 
+            navigate : ""
+             
         })
 
     }
 
     return (
 
-        <div className="position-fixed top-0 start-0" style={{zIndex : 4}}>
+        <div className="position-fixed top-0 start-0" style={{zIndex : 10}}>
             <div className="location-background d-flex justify-content-center align-items-center p-5">
 
                 <div className="user-form d-flex flex-column p-4 gap-5 align-items-center border rounded-1 ">

@@ -1,8 +1,8 @@
+import { useEffect } from "react";
 import { Link , useNavigate } from "react-router-dom"
 import {IMG_CLOUD_LINK } from "../config.js";
 import QuickMenu from "./QuickMenu.js";
 import useIsAuthenticated from "../utils/useIsAuthenticated.js";
-import { useEffect } from "react";
 
 const RestaurantCard= ({name , cuisines , cloudinaryImageId , id , avgRating
     , deliveryTime, costForTwo , aggregatedDiscountInfo

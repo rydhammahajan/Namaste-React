@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter ,  Outlet , RouterProvider } from "react-router-dom";
 import Header from "./components/Header";
@@ -9,17 +9,18 @@ import Body from "./components/Body";
 import RestaurantMenu from "./components/RestaurantMenu";
 import About from "./components/About"
 import Error from "./components/Error";
-import Location from "./components/Location";
 import Help from "./components/Help";
-import Profile from "./components/Profile";
 import LocationContext from "./utils/LocationContext";
 import UserContext from "./utils/UserContext";
 import ModalContext from "./utils/ModalContext";
+import Modal from "./components/Modal";
+import Location from "./components/Location";
+import useIsAuthenticated from "./utils/useIsAuthenticated";
+import Shimmer from "./components/Shimmer";
 
 
- 
 const AppLayout = () => {
-
+    
     const data = JSON.parse(localStorage.getItem("USER")) ; 
 
     const [locationCoords , setLocationCoords] = useState({ 
@@ -29,7 +30,7 @@ const AppLayout = () => {
 
     const [location, setLocation] = useState({
         locationName : "" 
-    }) ; 
+    }) ;  
 
     const [locationModal , setLocationModal]  = useState({
         display : true
@@ -42,6 +43,8 @@ const AppLayout = () => {
     }) ; 
 
     const [modal , setModal] = useState({}) ; 
+
+   
    
     return(
     <>
@@ -52,7 +55,7 @@ const AppLayout = () => {
 
                 <Header/>
                 <Outlet/>
-
+            
             </ModalContext.Provider>
             </UserContext.Provider>
             </LocationContext.Provider>
@@ -91,17 +94,25 @@ const appRouter = new createBrowserRouter([
             {
                 path : "/help"  , 
                 element :<Help/> , 
+            },
+            {
+                path : "/signup"  , 
+                element :<SignUp/> ,
+            },
+            {
+                path : "/login"  , 
+                element :<LogIn/> ,
             }
         ]
     },
-    {
-        path : "/signup"  , 
-        element :<SignUp/> ,
-    },
-    {
-        path : "/login"  , 
-        element :<LogIn/> ,
-    }
+    // {
+    //     path : "/signup"  , 
+    //     element :<SignUp/> ,
+    // },
+    // {
+    //     path : "/login"  , 
+    //     element :<LogIn/> ,
+    // }
 
 ])
 

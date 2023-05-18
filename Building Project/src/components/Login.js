@@ -1,29 +1,28 @@
-import {useState ,  useEffect} from "react" ; 
-import {Link, useNavigate} from "react-router-dom" ; 
+import {useState ,  useEffect , useContext} from "react" ; 
+import {Link} from "react-router-dom" ; 
 import { USER_AUTHENTICATE_API } from "../config";
+import ModalContext from "../utils/ModalContext";
+import Modal from "./Modal";
 import useIsAuthenticated from "../utils/useIsAuthenticated";
-const image = require("../assets/side.jpg")
+import { useNavigate } from "react-router-dom"; 
+
 
 
 const LogIn = () => {
 
-    let [email , setEmail] = useState(""); 
-    let [password , setPassword] = useState("");
-    let [buttonState  , setButtonState] = useState(false) ;
-    let [isPasswordDirty , setIsPasswordDirty ] = useState(false) ; 
-    let [isEmailDirty , setEmailDirty ] = useState(false) ; 
-    let [logInError , setLogInError] = useState("") ; 
-    const {isAuthenticated , setIsAuthenticated} = useIsAuthenticated() ; 
-
-    const navigate = useNavigate() ;  //Navigate Hook
-
-    useEffect(() => {
-        if (isAuthenticated === true) {
-          navigate("/");
-        }
-    }, [isAuthenticated]);
+    const [email , setEmail] = useState(""); 
+    const [password , setPassword] = useState("");
+    const [buttonState  , setButtonState] = useState(false) ;
+    const [isPasswordDirty , setIsPasswordDirty ] = useState(false) ; 
+    const [isEmailDirty , setEmailDirty ] = useState(false) ; 
+    const [logInError , setLogInError] = useState("") ; 
+    const {modal , setModal} = useContext(ModalContext)
+    const image = require("../assets/side.jpg")
+    const {setIsAuthenticated } = useIsAuthenticated() ; 
 
 
+
+    
     function CheckFormSubmission() {
         if(email !== "" && password !== "") {
             return true;
@@ -47,14 +46,27 @@ const LogIn = () => {
           }) ;
          const response_json = await response.json() ; 
 
-         console.log(response_json) ;
-         if(response_json.status === "ok") {
+         if(response_json?.status === "ok") {
            
             localStorage.setItem('USER', JSON.stringify({
-                ...response_json.user,
-                accessToken: response_json.accessToken
-            }));
-            setIsAuthenticated(true) ;            
+                ...response_json?.user,
+                accessToken: response_json?.accessToken
+            })); 
+            
+            setIsAuthenticated(true) ; 
+
+            setModal({
+
+                ...modal ,
+                name : "afterLogIn" , 
+                heading : "Login Successful",
+                navigate : "/" , 
+                description : "" , 
+                message : "" , 
+                display : true 
+            })        
+            
+         
          } 
          else{
             setLogInError(response_json.message)
@@ -78,6 +90,8 @@ const LogIn = () => {
 
     return (
 
+        <>
+        {modal.display === true && modal.name === "afterLogIn" && <Modal/>}
         <div className="d-flex justify-content-center align-items-center background-component">
 
 
@@ -93,8 +107,6 @@ const LogIn = () => {
                     <span className="h1 text-light" style={{fontSize : "45px"}}>Flavour Finders</span>
                 </div>
 
-                { logInError != "" && <div className="text-danger fs-5">{logInError} :( <br></br>email and/or password not valid</div> 
-                }
 
                 <h1 className=" text-color ">Login</h1>
 
@@ -126,16 +138,19 @@ const LogIn = () => {
                     }
                 </label>
 
+                { logInError != "" && <div className="text-danger fs-5">{logInError} ! <br></br>email and/or password not valid</div> 
+                }
                 
     
 
                 <button className="form-button fs-3  " disabled={!buttonState ? true : false} 
-                onClick = {() => {SendLogInRequest() ;}} type = "submit">Submit</button>
+                onClick = {() => { SendLogInRequest() ;}} type = "submit">Submit</button>
 
                 <p className="fs-6 h1" >A new user?  <Link to = "/signup" className="text-color"><span>SignUp </span></Link></p>
 
             </div>
         </div>
+        </>
         
     )
 
