@@ -26,9 +26,7 @@ const Body = () => {
     let [filteredRestaurants , setFilteredRestaurants] = useState([]) ;
     let [sortAnswer , setSortAnswer] = useState(useParams().sortBy);
     const {locationCoords , locationModal} = useContext(LocationContext) ; 
-    const {isAuthenticated} = useIsAuthenticated() ; 
-    const {modal} = useContext(ModalContext) ;
-    const navigate = useNavigate() ;
+   
 
     console.log(locationModal) ;
     
@@ -37,10 +35,6 @@ const Body = () => {
     } , [sortAnswer , locationCoords]) ; 
 
     
-
-    useEffect(()=>{ 
-        if(isAuthenticated === false) navigate("/login") ;
-    } , [isAuthenticated])
 
     async function fetchAPIData(){
         const data = await fetch(`https://www.swiggy.com/dapi/restaurants/list/v5?lat=${locationCoords.lat}&lng=${locationCoords.long}&sortBy=${sortAnswer ? sortAnswer : "RELEVANCE"}&offset=10&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING`) ; 
@@ -60,8 +54,6 @@ const Body = () => {
             (
                 <>
 
-                {/* {locationModal.display  && <Location/> }
-                {modal.name === "afterLocation" && modal.display === true && <Modal/>} */}
 
                 <Carousel/>
                 

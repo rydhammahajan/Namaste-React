@@ -16,10 +16,11 @@ import ModalContext from "./utils/ModalContext";
 import Modal from "./components/Modal";
 import Location from "./components/Location";
 import useIsAuthenticated from "./utils/useIsAuthenticated";
-import Shimmer from "./components/Shimmer";
 
 
 const AppLayout = () => {
+
+    const {isAuthenticated} = useIsAuthenticated()
     
     const data = JSON.parse(localStorage.getItem("USER")) ; 
 
@@ -43,8 +44,6 @@ const AppLayout = () => {
     }) ; 
 
     const [modal , setModal] = useState({}) ; 
-
-   
    
     return(
     <>
@@ -53,8 +52,10 @@ const AppLayout = () => {
 
             <ModalContext.Provider value = {{modal : modal  , setModal : setModal}}> 
 
-                <Header/>
-                <Outlet/>
+                {modal.display === true && <Modal/>}
+                {isAuthenticated && locationModal.display && <Location/>}
+                <Header key={10}/>
+                <Outlet key = {11}/>
             
             </ModalContext.Provider>
             </UserContext.Provider>

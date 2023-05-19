@@ -7,15 +7,14 @@ import LogIn from "./LogIn"
 const Header = () => {
 
     const {location } = useContext(LocationContext) ; 
-    const {isAuthenticated , logout} = useIsAuthenticated()
+    const {isAuthenticated} = useIsAuthenticated() ; 
+    const {logout} = useIsAuthenticated() ;
 
     useEffect(() => {
         console.log(isAuthenticated);
       }, [isAuthenticated]);
-    
-    // if (isAuthenticated === false) {
-    // return <></>;
-    // }
+
+    if(!isAuthenticated) return <></>
     
     return (
  

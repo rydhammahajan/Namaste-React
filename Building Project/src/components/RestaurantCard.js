@@ -8,14 +8,6 @@ const RestaurantCard= ({name , cuisines , cloudinaryImageId , id , avgRating
     , deliveryTime, costForTwo , aggregatedDiscountInfo
 }) => {
 
-        const {isAuthenticated} = useIsAuthenticated() ;
-        const navigate = useNavigate();
-
-        useEffect(()=>{
-
-            if(isAuthenticated === false) navigate("/login") ; 
-        })
-
         return (
 
         <Link to = {"/restaurant/"+id } >
