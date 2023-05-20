@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/rydhammahajan/Namaste-React#readme",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-geocode": "^0.2.3",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.0"
   },
   "devDependencies": {

@@ -14,7 +14,7 @@ const Header = () => {
         console.log(isAuthenticated);
       }, [isAuthenticated]);
 
-    if(!isAuthenticated) return <></>
+    // if(!isAuthenticated) return <></>
     
     return (
  
@@ -38,7 +38,7 @@ const Header = () => {
                 <Link to = "/search" ><li>Restaurants</li></Link>
                 <Link to = "/about" ><li>About Us</li></Link>
                 <Link to = "/help" ><li>Help</li></Link>
-                <Link to = "/" ><li>Cart</li></Link>
+                <Link to = "/cart" ><li>Cart</li></Link>
                 <Link to = "/profile" ><li>Profile</li></Link>
 
                 {

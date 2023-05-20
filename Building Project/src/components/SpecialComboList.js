@@ -1,3 +1,5 @@
+import ManageCart from "./ManageCart";
+
 const SpecialComboList = ({item}) =>{
         const {isVeg , name , price , description} = item || {} ; 
         return (
@@ -16,6 +18,7 @@ const SpecialComboList = ({item}) =>{
                     </span>
 
                 </div>
+                <div><ManageCart {...item}/></div>
 
             </div>
         )

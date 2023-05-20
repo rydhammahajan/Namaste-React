@@ -11,7 +11,8 @@ const RestaurantCard= ({name , cuisines , cloudinaryImageId , id , avgRating
         return (
 
         <Link to = {"/restaurant/"+id } >
-        <div className="d-flex flex-column restaurant-card p-3  text-secondary position-relative" key = {id} >
+        <div className="d-flex flex-column restaurant-card p-3  py-5 text-secondary position-relative" key = {id} >
+
 
             <img src = {cloudinaryImageId !== ""? IMG_CLOUD_LINK + cloudinaryImageId : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrPVk2P2G9HzLbp-t_E-iaSJ9awZ65hdqSWNx_KF1cMWYLXyZQO9YorVUMChw77s8f-2M&usqp=CAU"}  alt = {name} height={"180px"} width={"260px"}></img>
             <div className="pt-2">

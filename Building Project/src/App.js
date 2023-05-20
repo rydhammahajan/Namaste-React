@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Body from "./components/Body";
 import RestaurantMenu from "./components/RestaurantMenu";
 import About from "./components/About"
+import Cart from "./components/Cart";
 import Error from "./components/Error";
 import Help from "./components/Help";
 import LocationContext from "./utils/LocationContext";
@@ -16,7 +17,8 @@ import ModalContext from "./utils/ModalContext";
 import Modal from "./components/Modal";
 import Location from "./components/Location";
 import useIsAuthenticated from "./utils/useIsAuthenticated";
-
+import { Provider } from "react-redux";
+import store from "./utils/Redux/store";
 
 const AppLayout = () => {
 
@@ -44,6 +46,7 @@ const AppLayout = () => {
     }) ; 
 
     const [modal , setModal] = useState({}) ; 
+
    
     return(
     <>
@@ -52,11 +55,14 @@ const AppLayout = () => {
 
             <ModalContext.Provider value = {{modal : modal  , setModal : setModal}}> 
 
+            <Provider store = {store}>
+
                 {modal.display === true && <Modal/>}
-                {isAuthenticated && locationModal.display && <Location/>}
+                {/* {isAuthenticated && locationModal.display && <Location/>} */}
                 <Header key={10}/>
                 <Outlet key = {11}/>
             
+            </Provider>
             </ModalContext.Provider>
             </UserContext.Provider>
             </LocationContext.Provider>
@@ -103,6 +109,9 @@ const appRouter = new createBrowserRouter([
             {
                 path : "/login"  , 
                 element :<LogIn/> ,
+            },{
+                path : "/cart" , 
+                element : <Cart/>
             }
         ]
     },

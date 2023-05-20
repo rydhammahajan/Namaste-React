@@ -1,7 +1,7 @@
 import { IMG_CLOUD_LINK } from "../config";
+import ManageCart from "./ManageCart";
 const RecommendedList = ({item}) => {
-    
-    const {isVeg , name , price , description , imageId} = item || {}; 
+    const {isVeg , name , defaultPrice , price ,  description , imageId , id} = item || {};
     return (
         <div className="d-flex py-3 px-5 justify-content-between restaurant-menu-section my-4 gap-5">
 
@@ -12,14 +12,16 @@ const RecommendedList = ({item}) => {
 
                 <span className="h1 fs-5">{name}</span>
 
-                <span className="text-secondary">Rs. {price /100}</span>
+                <span className="text-secondary"> Rs.{price ?  price/100 : defaultPrice /100 }</span>
 
                 <span className="text-secondary">{description}
                 </span>
 
             </div>
-            <img src = {imageId ? IMG_CLOUD_LINK+ imageId
-            : ""} height={"100px"}/>
+            <div>
+                <img src = {imageId ? IMG_CLOUD_LINK+ imageId: ""} height={"100px"}/>
+                <ManageCart {...item} />
+            </div>
         </div>
     )
 }

@@ -124,7 +124,7 @@ const Body = () => {
                     {
                         filteredRestaurants?.length === 0 ? <h1>Oops! No Search Result.</h1> :
 
-                        <div className="d-flex flex-wrap gap-5 justify-content-evenly">
+                        <div className="d-flex flex-wrap gap-3 justify-content-evenly">
                                 {filteredRestaurants?.map((restaurantListItem) => (
                                     <RestaurantCard {...restaurantListItem.data.data} />
                                 ))} 
