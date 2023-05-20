@@ -9,6 +9,7 @@ const  cartSlice = createSlice({
 
     initialState : {
         items : new Map() ,
+        totalCost : 0 , 
     } , 
 
     reducers : {
@@ -19,6 +20,8 @@ const  cartSlice = createSlice({
             data ? state.items.set(action.payload[0] ,{...action.payload[1]  , count: data.count+1})
             : 
             state.items.set(action.payload[0] ,{ ...action.payload[1] , count: 1 }) ;
+
+            state.totalCost += (action.payload[1].price/100)
         },
 
         removeItem : (state , action) => {
@@ -29,6 +32,7 @@ const  cartSlice = createSlice({
             }else{
                 state.items.delete(action.payload)
             } 
+            state.totalCost -= (data.price/100)
         } ,
 
         clearCart : (state) => {

@@ -6,7 +6,9 @@ import CartItem from "./CartItem";
 const Cart = ()=>{
 
     const [cartItems , setCartItems] = useState() ; 
+
     let items = useSelector(store => store.cart.items); 
+    let totalCost = useSelector(store => store.cart.totalCost); 
     
 
 
@@ -37,7 +39,7 @@ const Cart = ()=>{
                 <div className="fs-1 h1 text-light border-bottom py-4 px-4 position-sticky top-0 background-color" style={{zIndex : "5" }}>Cart Items <i class="fa-solid fa-cart-shopping"></i></div>
                 <div className="p-5 mx-5 d-flex flex-column gap-3">
 
-                <div className="d-flex gap-3 justify-content-around">
+                <div className="d-flex gap-3 ">
 
 
                     <div>
@@ -50,9 +52,11 @@ const Cart = ()=>{
 
                     <div className="d-flex flex-column border align-items-center gap-4 p-5 payment-box">
                     <span className="fs-3 h1">Want to Add more ?</span>
-                    <button class = "form-button fs-5 p-3 text-center">Add more</button>
-                    <span><span className="fs-3 h1">Payment Info?</span>
+                    <Link to = "/search"><button class = "form-button fs-5 p-3 text-center">Add more</button></Link>
+                    <span><span className="fs-3 h1">Payment Info</span>
                     <i className ="fa-solid fa-wallet text-secondary fs-1 ps-3"></i></span>
+
+                    <span className="text-secondary fs-4 border-top pt-3 border-dark">Amount To Be Paid :  Rs. {totalCost}</span>
                     </div>
                 </div>
                 
