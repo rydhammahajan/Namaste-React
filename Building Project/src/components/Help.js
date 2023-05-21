@@ -1,15 +1,36 @@
-import { useState } from "react";
+import { useState , useEffect , useContext } from "react";
 import useFAQ from "../utils/useFAQ";
 import Accordian from "./Accordian";
+import LocationContext from "../utils/LocationContext";
+import Location from "./Location";
+import HeaderContext from "../utils/HeaderContext";
+import { useNavigate } from "react-router-dom";
+import useIsAuthenticated from "../utils/useIsAuthenticated";
 const Help = () => {
 
     const [visibleAccordian , setVisibleAccordian] = useState() ; 
     const questions = useFAQ() ; 
+    const {locationModal} = useContext(LocationContext)
+    const {setPage} = useContext(HeaderContext) ;
+    const {isAuthenticated} = useIsAuthenticated()
+    const navigate = useNavigate() ;
+
+    useEffect(()=>{
+        setPage({
+            currentPage : "help" ,
+        })
+    }, [])
+
+    useEffect(()=>{
+        if(isAuthenticated === false){
+            navigate("/login")
+        }
+    } , [isAuthenticated])
 
     return (
 
         <div className = "faq py-5 ">
-
+            {locationModal.display && <Location/>}
            
             <div className="position-sticky top-0 faq-header  my-5 px-5 py-2">
                 <h1 className="text-light">Help & Support</h1>

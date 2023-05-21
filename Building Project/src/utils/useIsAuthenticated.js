@@ -30,10 +30,20 @@ const useIsAuthenticated = () => {
                 setIsAuthenticated(true)
             }else{
                 setIsAuthenticated(false)
+                setLocation({
+                    locationName : ""  })
+                setLocationModal({
+                    display : true 
+                })
             }
           
         }catch(error) {
             setIsAuthenticated(false) ;
+            setLocation({
+                locationName : ""  })
+            setLocationModal({
+                display : true 
+            })
         }
 
 
@@ -41,7 +51,6 @@ const useIsAuthenticated = () => {
 
 
     useEffect(()=> {
-        console.log("inside effect" , isAuthenticated) ; 
         Check() ; 
     } )
 
@@ -52,7 +61,6 @@ const useIsAuthenticated = () => {
             ...modal , 
             name : "afterLogOut" , 
             heading : "Logged Out!",
-            navigate : "/" , 
             description : "" , 
             message : "" , 
             display : true 

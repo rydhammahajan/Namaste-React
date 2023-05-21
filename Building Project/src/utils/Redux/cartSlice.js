@@ -37,6 +37,7 @@ const  cartSlice = createSlice({
 
         clearCart : (state) => {
             state.items.clear() ;
+            state.totalCost = 0 ; 
         }
 
     } 

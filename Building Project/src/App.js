@@ -7,9 +7,10 @@ import LogIn from "./components/LogIn";
 import Home from "./components/Home";
 import Body from "./components/Body";
 import RestaurantMenu from "./components/RestaurantMenu";
-import About from "./components/About"
+// import About from "./components/About"
 import Cart from "./components/Cart";
 import Error from "./components/Error";
+import Footer from "./components/Footer";
 import Help from "./components/Help";
 import LocationContext from "./utils/LocationContext";
 import UserContext from "./utils/UserContext";
@@ -19,10 +20,11 @@ import Location from "./components/Location";
 import useIsAuthenticated from "./utils/useIsAuthenticated";
 import { Provider } from "react-redux";
 import store from "./utils/Redux/store";
+import HeaderContext from "./utils/HeaderContext";
 
 const AppLayout = () => {
 
-    const {isAuthenticated} = useIsAuthenticated()
+    const {isAuthenticated} = useIsAuthenticated() 
     
     const data = JSON.parse(localStorage.getItem("USER")) ; 
 
@@ -47,6 +49,10 @@ const AppLayout = () => {
 
     const [modal , setModal] = useState({}) ; 
 
+    const [page , setPage] = useState({
+        currentPage : ""
+    }) ; 
+
    
     return(
     <>
@@ -55,14 +61,17 @@ const AppLayout = () => {
 
             <ModalContext.Provider value = {{modal : modal  , setModal : setModal}}> 
 
+            <HeaderContext.Provider value =  {{page : page , setPage : setPage}}>
+
             <Provider store = {store}>
 
                 {modal.display === true && <Modal/>}
-                {/* {isAuthenticated && locationModal.display && <Location/>} */}
-                <Header key={10}/>
+                {(page.currentPage !== "login" && page.currentPage !== "signup")&& <Header key={10}/>}
                 <Outlet key = {11}/>
+                {(page.currentPage !== "login" && page.currentPage !== "signup")&& <Footer/>}
             
             </Provider>
+            </HeaderContext.Provider>
             </ModalContext.Provider>
             </UserContext.Provider>
             </LocationContext.Provider>
@@ -82,22 +91,22 @@ const appRouter = new createBrowserRouter([
                 element :<Home/> ,  
             },
             {
-                path : "/search"  , 
+                path : "/restaurants"  , 
                 element :<Body/> ,  
             },
             
             {
-                path : "/search/:sortBy"  , 
+                path : "/restaurants/:sortBy"  , 
                 element :<Body/> ,  
             },
             {
                 path : "restaurant/:resId" , 
                 element :  <RestaurantMenu/>
             },
-            {
-                path : "about" , 
-                element :  <About/>
-            },
+            // {
+            //     path : "/about" , 
+            //     element :  <About/>
+            // },
             {
                 path : "/help"  , 
                 element :<Help/> , 
@@ -115,14 +124,7 @@ const appRouter = new createBrowserRouter([
             }
         ]
     },
-    // {
-    //     path : "/signup"  , 
-    //     element :<SignUp/> ,
-    // },
-    // {
-    //     path : "/login"  , 
-    //     element :<LogIn/> ,
-    // }
+   
 
 ])
 

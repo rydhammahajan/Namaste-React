@@ -4,14 +4,16 @@ import Logo from "../assets/logo.png"
 import LocationContext from "../utils/LocationContext"
 import useIsAuthenticated from "../utils/useIsAuthenticated"
 import LogIn from "./LogIn"
+import HeaderContext from "../utils/HeaderContext"
 const Header = () => {
 
     const {location } = useContext(LocationContext) ; 
     const {isAuthenticated} = useIsAuthenticated() ; 
     const {logout} = useIsAuthenticated() ;
+    const {page , setPage} = useContext(HeaderContext) ; 
 
     useEffect(() => {
-        console.log(isAuthenticated);
+        // console.log(isAuthenticated);
       }, [isAuthenticated]);
 
     // if(!isAuthenticated) return <></>
@@ -25,7 +27,7 @@ const Header = () => {
                 <Link to = "/" ><img src = {Logo} alt = "logo" style = {{height : "60px" }}/></Link> 
                 {location.locationName !== "" &&
                     <>
-                    <i class="fa-solid fa-location-dot pt-3 ms-5  fs-3 text-color"></i> 
+                    <i className="fa-solid fa-location-dot pt-3 ms-5  fs-3 text-color"></i> 
                     <div className = "text-truncate d-inline-block pt-3" style={{maxWidth : "200px"}}>{location.locationName} </div>
                     </>
                 }
@@ -34,12 +36,16 @@ const Header = () => {
 
            <ul className='nav-menu d-flex pt-3 gap-5' style = {{listStyle : "none"}}>
                 
-                <Link to = "/" ><li>Home</li></Link>
-                <Link to = "/search" ><li>Restaurants</li></Link>
-                <Link to = "/about" ><li>About Us</li></Link>
-                <Link to = "/help" ><li>Help</li></Link>
-                <Link to = "/cart" ><li>Cart</li></Link>
-                <Link to = "/profile" ><li>Profile</li></Link>
+                <Link to = "/" 
+                className= {page.currentPage === "home" ? "border-bottom border-dark pe-2" : undefined} ><li><i className="fa-solid fa-house"></i> Home</li></Link>
+
+                <Link to = "/restaurants" className= {page.currentPage === "restaurants" ? "border-bottom border-dark pe-2" : undefined}><li><i className="fa-solid fa-utensils"></i> Restaurants</li></Link>
+
+                {/* <Link to = "/about"  className= {page.currentPage === "about" ? "border-bottom border-dark pe-2" : undefined}><li><i className="fa-solid fa-info"></i> About Us</li></Link> */}
+
+                <Link to = "/help" className= {page.currentPage === "help" ? "border-bottom border-dark pe-2" : undefined}><li><i className="fa-solid fa-question"></i> Help</li></Link>
+
+                <Link to = "/cart" className= {page.currentPage === "cart" ? "border-bottom border-dark pe-2" : undefined}><li><i className="fa-solid fa-cart-shopping"></i> Cart</li></Link>
 
                 {
                     isAuthenticated === true  ? <button className="text-color border-0 px-3 bg-light rounded-1" onClick={()=>{

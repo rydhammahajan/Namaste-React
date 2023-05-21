@@ -1,19 +1,30 @@
 import { Link } from "react-router-dom";
-import { useState , useEffect} from "react";
+import { useState , useEffect , useContext} from "react";
 import useIsAuthenticated from "../utils/useIsAuthenticated";
+import HeaderContext from "../utils/HeaderContext";
+
 const Home = () => {
 
-    let [path , setPath] = useState("/search") ;  
+    let [path , setPath] = useState("/restaurants") ;  
     
     const {isAuthenticated} = useIsAuthenticated();
+    const {setPage} = useContext(HeaderContext) ;
+
+
+    useEffect(()=>{
+        setPage({
+            currentPage : "home" ,
+        })
+    }, [])
 
     useEffect(() => {
-        if (isAuthenticated === false) {
+        console.log(isAuthenticated) ;
+        if (!isAuthenticated) {
         setPath("/login");
         } else {
-        setPath("/search");
+        setPath("/restaurants");
         }
-    }, [isAuthenticated]);
+    });
     
     return(
         <>

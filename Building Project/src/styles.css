@@ -309,7 +309,7 @@ a{
 .single-cart-item{
 
     min-height: 100px; 
-    min-width : 800px ;
+    min-width : 500px ;
     box-shadow: 0 0 10px lightgrey;
 }
 
@@ -320,5 +320,5 @@ a{
     max-height : 500px ;
     position: fixed ;
     top : 250px ;
-    right : 100px
+    right : 80px
 }

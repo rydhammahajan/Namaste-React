@@ -1,12 +1,14 @@
-import { useEffect } from "react";
-import { Link , useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import {IMG_CLOUD_LINK } from "../config.js";
 import QuickMenu from "./QuickMenu.js";
-import useIsAuthenticated from "../utils/useIsAuthenticated.js";
+import useQuickMenu from "../utils/useQuickMenu.js";
 
 const RestaurantCard= ({name , cuisines , cloudinaryImageId , id , avgRating
     , deliveryTime, costForTwo , aggregatedDiscountInfo
 }) => {
+
+        const quickMenuData = useQuickMenu(id) ; 
+        
 
         return (
 
@@ -35,10 +37,10 @@ const RestaurantCard= ({name , cuisines , cloudinaryImageId , id , avgRating
 
 
             <div className="quick-menu-section ">
-                <div className="h6 brown-text  text-center quick-menu-text">
+                {quickMenuData && <div className="h6 brown-text  text-center quick-menu-text">
                     <hr className="text-secondary"/>
                     Quick Menu
-                </div>  
+                </div>  }
                 <QuickMenu id = {id} />
 
             </div>

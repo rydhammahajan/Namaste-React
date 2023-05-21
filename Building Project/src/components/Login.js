@@ -4,7 +4,8 @@ import { USER_AUTHENTICATE_API } from "../config";
 import ModalContext from "../utils/ModalContext";
 import Modal from "./Modal";
 import useIsAuthenticated from "../utils/useIsAuthenticated";
-import { useNavigate } from "react-router-dom"; 
+import HeaderContext from "../utils/HeaderContext";
+
 
 
 
@@ -19,6 +20,13 @@ const LogIn = () => {
     const {modal , setModal} = useContext(ModalContext)
     const image = require("../assets/side.jpg")
     const {setIsAuthenticated } = useIsAuthenticated() ; 
+    const {setPage} = useContext(HeaderContext) ;
+
+    useEffect(()=>{
+        setPage({
+            currentPage : "login" ,
+        })
+    }, [])
 
 
 

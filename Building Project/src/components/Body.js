@@ -10,6 +10,7 @@ import useIsAuthenticated from "../utils/useIsAuthenticated.js";
 import { useNavigate } from "react-router-dom";
 import ModalContext from "../utils/ModalContext";  
 import Modal from "./Modal";
+import HeaderContext from "../utils/HeaderContext";
 
 function performSearch(inputText , restaurants) {
     if(inputText === "") return restaurants ;
@@ -26,15 +27,26 @@ const Body = () => {
     let [filteredRestaurants , setFilteredRestaurants] = useState([]) ;
     let [sortAnswer , setSortAnswer] = useState(useParams().sortBy);
     const {locationCoords , locationModal} = useContext(LocationContext) ; 
-   
+    const {setPage} = useContext(HeaderContext) ;
+    const {isAuthenticated} = useIsAuthenticated() ; 
+    const navigate = useNavigate() ; 
 
-    console.log(locationModal) ;
-    
+    useEffect(()=>{
+        setPage({
+            currentPage : "restaurants" ,
+        })
+    }, [])
+       
     useEffect(()=> {
         fetchAPIData() ;  
     } , [sortAnswer , locationCoords]) ; 
 
-    
+    useEffect(()=>{
+        console.log(isAuthenticated) ;
+        if(isAuthenticated === false){
+            navigate("/login")
+        }
+    } , [isAuthenticated])
 
     async function fetchAPIData(){
         const data = await fetch(`https://www.swiggy.com/dapi/restaurants/list/v5?lat=${locationCoords.lat}&lng=${locationCoords.long}&sortBy=${sortAnswer ? sortAnswer : "RELEVANCE"}&offset=10&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING`) ; 
@@ -43,7 +55,7 @@ const Body = () => {
         setAllRestaurants(json.data.cards);
         setFilteredRestaurants(json.data.cards)
     }
-    
+
     return ( 
         <div className="body p-5 d-flex flex-column justify-content-center">
 
@@ -54,7 +66,7 @@ const Body = () => {
             (
                 <>
 
-
+                {locationModal.display && <Location/>}
                 <Carousel/>
                 
                 <div className="filter-section border-bottom  d-flex justify-content-between p-3 ">
@@ -62,33 +74,33 @@ const Body = () => {
                     <h1>Restaurants</h1>
                     <div className="d-flex justify-content-end pt-3 gap-5">
 
-                        <Link to = '/search/RELEVANCE' className="text-dark" key = "relevance" onClick = {()=>{
+                        <Link to = '/restaurants/RELEVANCE' className="text-dark" key = "relevance" onClick = {()=>{
                             setSortAnswer("RELEVANCE")
                             setInputText("") ;
 
                         }}><span className = {sortAnswer === "RELEVANCE" ? "border-bottom border-dark" : undefined}  >Relevance</span></Link>
 
-                        <Link to = '/search/DELIVERY_TIME'  className="text-dark" key = "delivery" onClick = {()=>{
+                        <Link to = '/restaurants/DELIVERY_TIME'  className="text-dark" key = "delivery" onClick = {()=>{
                             setSortAnswer("DELIVERY_TIME")
                             setInputText("") ;
                         }}><span className = {sortAnswer === "DELIVERY_TIME" ? "border-bottom border-dark" : undefined}>Delivery Time</span></Link>
 
-                        <Link to = '/search/RATING'  className="text-dark" key = "rating" onClick = {()=>{
+                        <Link to = '/restaurants/RATING'  className="text-dark" key = "rating" onClick = {()=>{
                             setSortAnswer("RATING")
                             setInputText("") ;
                         }}><span className = {sortAnswer === "RATING" ?"border-bottom border-dark" : undefined}>Rating</span></Link>
 
-                        <Link to = '/search/COST_FOR_TWO'  className="text-dark" key = "lowCost" onClick = {()=>{
+                        <Link to = '/restaurants/COST_FOR_TWO'  className="text-dark" key = "lowCost" onClick = {()=>{
                             setSortAnswer("COST_FOR_TWO");
                             setInputText("") ;
                         }}><span className = {sortAnswer === "COST_FOR_TWO" ? "border-bottom border-dark" : undefined}>Cost: Low To High</span></Link>
 
-                        <Link to = '/search/COST_FOR_TWO_H2L' className="text-dark"  key = "highCost" onClick = {()=>{
+                        <Link to = '/restaurants/COST_FOR_TWO_H2L' className="text-dark"  key = "highCost" onClick = {()=>{
                             setSortAnswer("COST_FOR_TWO_H2L");
                             setInputText("") ;
                         }}><span className = {sortAnswer === "COST_FOR_TWO_H2L" ? "border-bottom border-dark" : undefined}>Cost: High To Low</span></Link>
 
-                        <Link to = "/search"  onClick={()=>{
+                        <Link to = "/restaurants"  onClick={()=>{
                             setSortAnswer("");
                             setInputText("") ;
                         }}><span className="text-color"><i className="fa-solid fa-filter" ></i>Clear Filters</span></Link>

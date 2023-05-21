@@ -42,7 +42,7 @@ const ManageCart = ({name ,  defaultPrice , price , imageId , id})=>{
             }}
             >ADD</button> : <span className="fs-6 text-success h1">{currentItem.count}</span> }
 
-            {currentItem && <i class="fa-solid fa-plus pt-1" 
+            {currentItem && <i className="fa-solid fa-plus pt-1" 
             onClick={()=>{
                 HandleAdd() ; 
             }}

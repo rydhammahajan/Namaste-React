@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import { CREATE_USER_API } from "../config";
 import ModalContext from "../utils/ModalContext";
 import Modal from "./Modal";
+import HeaderContext from "../utils/HeaderContext";
 
 const image = require("../assets/side.jpg")
 const SignUp = () => {
@@ -19,6 +20,13 @@ const SignUp = () => {
     const [isEmailDirty , setEmailDirty ] = useState(false) ; 
     const [signUpError , setSignUpError] = useState("") ; 
     const {modal , setModal} = useContext(ModalContext) ; 
+    const {setPage} = useContext(HeaderContext) ;
+
+    useEffect(()=>{
+        setPage({
+            currentPage : "signup" ,
+        })
+    }, [])
 
     
     function CheckPasswordValidation(){
@@ -65,7 +73,7 @@ const SignUp = () => {
                 name : "afterSignUp" , 
                 heading : "Welcome",
                 message : "Account Created Successfully!" , 
-                description : "Complete next steps to start ordering food❤️" , 
+                description : "Login next to start your session!❤️" , 
                 navigate : "/login" , 
                 display : true 
             })
