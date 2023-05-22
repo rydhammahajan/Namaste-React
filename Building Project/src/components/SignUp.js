@@ -18,9 +18,14 @@ const SignUp = () => {
     const [isConfirmPasswordDirty , setIsConfirmPasswordDirty ] = useState(false) ; 
     const [isPasswordDirty , setIsPasswordDirty ] = useState(false) ; 
     const [isEmailDirty , setEmailDirty ] = useState(false) ; 
+    const [isFirstNameDirty , setIsFirstNameDirty ] = useState(false) ; 
+    const [isLastNameDirty, setIsLastNameDirty ] = useState(false) ; 
     const [signUpError , setSignUpError] = useState("") ; 
+    const [onSubmit , setOnSubmit]  = useState(false)  ; 
     const {modal , setModal} = useContext(ModalContext) ; 
     const {setPage} = useContext(HeaderContext) ;
+
+
 
     useEffect(()=>{
         setPage({
@@ -28,6 +33,19 @@ const SignUp = () => {
         })
     }, [])
 
+    function ValidEmailPattern(){
+        const pattern = "^[a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+\.[a-zA-Z]+$"
+        const ans = email.match(pattern) ; 
+        return ans ; 
+    }
+    function ValidNamePattern(text){
+        const pattern = "^[a-zA-Z\s]+$"
+        const ans = text.match(pattern) ; 
+        return ans ;
+    }
+    function ValidPattern(){
+        return ValidEmailPattern() && ValidNamePattern(firstName) && ValidNamePattern(lastName) ; 
+    }
     
     function CheckPasswordValidation(){
         if(confirmPassword !== password && isConfirmPasswordDirty) {
@@ -39,6 +57,8 @@ const SignUp = () => {
     }
 
     function CheckFormSubmission() {
+
+        setOnSubmit(false) ; 
         if(email !== "" && password !== "" && password.length >= 8 && password === confirmPassword ) {
             return true;
         }
@@ -46,6 +66,11 @@ const SignUp = () => {
     }
 
     async function SendSignUpRequest(){
+
+        if(!ValidPattern()) {
+            setOnSubmit(true) ; 
+            return ;
+        }
 
         try{
             const response = await fetch(CREATE_USER_API, {
@@ -115,7 +140,7 @@ const SignUp = () => {
 
                 <img className = "signup-login-right-side" src = {image}/>
 
-                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "70px" , right : "40px"}}>
+                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "100px" , right : "40px"}}>
                     <span className="fs-4 text-light h1">Welcome</span>
                     <span className="fs-4 text-light h1">to the planet of</span>
                     <span className="h1 text-light" style={{fontSize : "45px"}}>Flavour Finders</span>
@@ -128,8 +153,12 @@ const SignUp = () => {
                     onChange={(e)=>{
                         setFirstName(e.target.value)
                         setSignUpError("") ; 
+                        setIsFirstNameDirty(true) ; 
                     }}
                     />
+                    {
+                        isFirstNameDirty && onSubmit && !ValidNamePattern(firstName) && firstName !== "" && <p className="text-danger small-fs">*Please Enter a valid alphabetical name</p>
+                    }
                 </label>
             
                 <label className="fs-5 text-secondary">Last Name<br/>
@@ -137,8 +166,12 @@ const SignUp = () => {
                         onChange={(e)=>{
                         setLastName(e.target.value)
                         setSignUpError("") ; 
+                        setIsLastNameDirty(true) ; 
                     }}
                     />
+                    {
+                        isLastNameDirty && onSubmit && !ValidNamePattern(lastName) && lastName !== "" && <p className="text-danger small-fs">*Please Enter a valid alphabetical name</p>
+                    }
                 </label>
 
                 <label className="fs-5 text-secondary">Email Id<br/>
@@ -149,7 +182,10 @@ const SignUp = () => {
                         setSignUpError("") ; 
                     }} required />
                     {
-                        isEmailDirty && email === "" ? <p className="text-danger small-fs">*Email is required</p> :<p></p>  
+                        isEmailDirty && email === "" && <p className="text-danger small-fs">*Email is required</p> 
+                    }
+                    {
+                        isEmailDirty && onSubmit && !ValidEmailPattern() && email !== "" && <p className="text-danger small-fs">*Please Enter a valid email <i className="text-secondary">abc@domainname</i></p>
                     }
                 </label>
                 

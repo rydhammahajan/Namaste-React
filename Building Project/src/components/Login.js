@@ -125,9 +125,11 @@ const LogIn = () => {
                         setEmailDirty(true) 
                         setLogInError("")
                     }} required />
+
                     {
-                        isEmailDirty && email === "" ? <p className="text-danger small-fs">*Email is required</p> :<p></p>  
+                        isEmailDirty && email === "" && <p className="text-danger small-fs">*Email is required</p>
                     }
+                    
                 </label>
                 
 
