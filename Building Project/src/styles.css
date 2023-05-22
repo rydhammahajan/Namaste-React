@@ -306,6 +306,10 @@ a{
     min-width : 100px ;
 }
 
+.cart{
+    min-height: 800px;
+}
+
 .single-cart-item{
 
     min-height: 100px; 

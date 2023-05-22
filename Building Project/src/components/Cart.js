@@ -42,6 +42,7 @@ const Cart = ()=>{
             navigate("/login")
         }
     } , [isAuthenticated])
+    
     return (
 
         <>

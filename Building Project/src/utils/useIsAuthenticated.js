@@ -7,64 +7,60 @@ const useIsAuthenticated = () => {
 
     const [isAuthenticated , setIsAuthenticated] = useState(null) ; 
     const {modal ,setModal} = useContext(ModalContext) ; 
-    const {setLocation} = useContext(LocationContext) ;  
-    const {setLocationCoords} = useContext(LocationContext) ; 
-    const {setLocationModal} = useContext(LocationContext) ; 
-
-
+    const {setLocation , setLocationCoords , setLocationModal } = useContext(LocationContext) ;  
+    
     async function Check() {
-        
-        try{
-            const token = await (JSON.parse(localStorage.getItem("USER")))?.accessToken;
-            const response = await fetch("https://www.melivecode.com/api/auth/user" , {
-                method: 'GET',
-                headers: {
-                    Authorization : `Bearer ${token}`
-                }
-            })
-            
 
-            const response_json = await response?.json() ; 
-            
-            if(response_json?.status === "ok"){
-                setIsAuthenticated(true)
-            }else{
-                setIsAuthenticated(false)
-                setLocation({
-                    locationName : ""  })
-                setLocationModal({
-                    display : true 
+        if(!localStorage.getItem("USER"))  setIsAuthenticated(false) ; 
+        else{
+
+            try{
+                const token = await (JSON.parse(localStorage.getItem("USER")))?.accessToken;
+                const response = await fetch("https://www.melivecode.com/api/auth/user" , {
+                    method: 'GET',
+                    headers: {
+                        Authorization : `Bearer ${token}`
+                    }
                 })
+                
+    
+                const response_json = await response?.json() ; 
+                
+                if(response_json?.status === "ok"){
+                    setIsAuthenticated(true)
+                }else{
+                    setIsAuthenticated(false)
+                    setLocation({
+                        locationName : ""  })
+                    setLocationModal({
+                        display : true 
+                    })
+                    setLocationCoords({
+                        lat:28.5047063, 
+                        long : 77.0500089 
+                    })
+                }
+              
+            }catch(error) {
+                setIsAuthenticated(false) ;
             }
-          
-        }catch(error) {
-            setIsAuthenticated(false) ;
-            setLocation({
-                locationName : ""  })
-            setLocationModal({
-                display : true 
-            })
+            
         }
+        
 
 
     }
 
-
     useEffect(()=> {
         Check() ; 
-    } )
+    })
 
     const logout = () => {
+
         localStorage.removeItem("USER");
+
         setIsAuthenticated(false);
-        setModal({
-            ...modal , 
-            name : "afterLogOut" , 
-            heading : "Logged Out!",
-            description : "" , 
-            message : "" , 
-            display : true 
-        }) 
+
         setLocation({
             locationName : ""  })
         setLocationCoords({
@@ -74,6 +70,17 @@ const useIsAuthenticated = () => {
         setLocationModal({
             display : true 
         })
+
+        setModal({
+            ...modal , 
+            name : "afterLogOut" , 
+            heading : "Logged Out!",
+            description : "" , 
+            message : "" , 
+            navigate : "" ,
+            display : true 
+        }) 
+
       };
     
     return { isAuthenticated, logout , setIsAuthenticated};

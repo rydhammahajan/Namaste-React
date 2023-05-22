@@ -24,7 +24,7 @@ import HeaderContext from "./utils/HeaderContext";
 
 const AppLayout = () => {
 
-    const {isAuthenticated} = useIsAuthenticated() 
+    // const {isAuthenticated} = useIsAuthenticated() 
     
     const data = JSON.parse(localStorage.getItem("USER")) ; 
 
