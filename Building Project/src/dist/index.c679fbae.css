@@ -1,0 +1,359 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 1200px;
+}
+
+.text-color {
+  color: #ee750c;
+}
+
+.background-color {
+  background-color: #ee750c;
+}
+
+.small-fs {
+  font-size: 15px;
+}
+
+.nav-bar {
+  width: 100%;
+  z-index: 3;
+  background-color: #fff;
+  position: sticky;
+  top: 0%;
+  box-shadow: 0 0 10px #d3d3d3;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav-menu a li {
+  color: #000;
+}
+
+.nav-menu a li:hover {
+  color: #ee750c;
+}
+
+.background-component {
+  min-height: 100vh;
+  min-width: 100%;
+  background-image: url("background.905ee0b4.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.signup-login-right-side {
+  height: 550px;
+  width: 380px;
+  border-radius: 10px;
+  position: absolute;
+  right: 0;
+}
+
+.signup-login-box {
+  width: 800px;
+  min-height: 520px;
+  background-color: #fff;
+  border-radius: 20px;
+  position: relative;
+}
+
+.form-button:disabled {
+  background-color: #f9b579;
+}
+
+.form-button {
+  min-height: 50px;
+  width: 200px;
+  color: #fff;
+  background-color: #ee750c;
+  border: none;
+  border-radius: 10px;
+}
+
+.form-input {
+  width: 300px;
+  border: none;
+  border-bottom: 1px solid #ee750c;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: #d3d3d3;
+  font-size: 16px;
+}
+
+.home-top {
+  height: 600px;
+  background-image: url("homeBg.f4a1f1ff.jpg");
+  background-size: cover;
+}
+
+.explore-button {
+  border: none;
+  border-radius: 10px;
+}
+
+.explore-button:active {
+  background-color: #ea9b56;
+}
+
+.famousRes:hover {
+  transition: all 1s ease-in-out;
+  scale: 1.2;
+  box-shadow: 0 0 10px 5px #d3d3d3;
+}
+
+.text-famousRes {
+  font-family: cursive;
+  font-size: 40px;
+}
+
+.instaRes {
+  filter: grayscale();
+}
+
+.instaRes:hover {
+  filter: grayscale(0%);
+}
+
+.location-background {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: #d3d3d3cc;
+}
+
+.user-form {
+  border-radius: 20px !important;
+}
+
+.options {
+  text-align: left;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+}
+
+.option-container {
+  width: 300px;
+  background-color: #fff;
+}
+
+.options:hover {
+  background-color: #ea9b56;
+}
+
+.user-form {
+  background-color: #fff;
+}
+
+.modal {
+  height: 100vh;
+  background-color: #d3d3d380;
+}
+
+.modal-body {
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.fa-x {
+  top: 20px;
+  right: 30px;
+}
+
+.faq {
+  background-color: #4f89a5;
+}
+
+.faq-header {
+  z-index: 4;
+  width: 100%;
+  background-color: #4f89a5;
+}
+
+.faq-body {
+  width: 65%;
+  z-index: 1;
+  border-radius: 20px;
+}
+
+.faq-email {
+  width: 30%;
+  z-index: 3;
+  border-radius: 20px;
+  position: fixed;
+  right: 50px;
+}
+
+.faq-ques {
+  background-color: #d3d3d333;
+  border-radius: 10px;
+}
+
+.faq-ques:hover {
+  color: #ee750c !important;
+}
+
+.fa-angle-up, .fa-angle-down {
+  right: 10px;
+}
+
+.carousel-group {
+  background-color: #fff;
+}
+
+.restaurant-card {
+  width: 300px;
+}
+
+.restaurant-card:hover {
+  box-shadow: 0 0 10px 5px #d3d3d3;
+}
+
+.brown-text {
+  color: brown;
+}
+
+.quick-menu-section {
+  display: none;
+}
+
+.restaurant-card:hover > .quick-menu-section {
+  display: inline-block;
+}
+
+.quick-menu-component {
+  height: 400px;
+  width: 300px;
+  visibility: hidden;
+  z-index: 2;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 0 10px #d3d3d3;
+}
+
+.quick-menu-text:hover {
+  color: #ee750c;
+}
+
+.quick-menu-item:hover {
+  color: #ee750c;
+  transform: scale(1.1);
+}
+
+.quick-menu-text:hover ~ .quick-menu-component, .quick-menu-component:hover {
+  visibility: visible;
+  transition: transform 1s ease-in-out;
+  transform: translateY(-60px);
+}
+
+.search-box input {
+  height: 50px;
+  width: 500px;
+  border: 1px solid #ee750c;
+}
+
+.search-box input:focus {
+  outline: none;
+}
+
+.search-box button {
+  height: 50px;
+  width: 100px;
+  color: #fff;
+  background-color: #ee750c;
+  border: none;
+  margin-left: -5px;
+}
+
+.search-box button:active {
+  background-color: #ee750ce6;
+}
+
+.restaurant-menu-header {
+  width: 70%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #d3d3d3;
+}
+
+.restaurant-menu-price {
+  width: 70%;
+  box-shadow: 0 0 10px #d3d3d3;
+}
+
+.restaurant-menu-section {
+  width: 1000px;
+  box-shadow: 0 0 10px #d3d3d3;
+}
+
+.shimmer-animation {
+  animation-name: shimmer;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-color: #d7d2d2;
+  }
+
+  to {
+    background-color: #e6e3e3;
+  }
+}
+
+.shimmer-search {
+  height: 50px;
+  width: 600px;
+}
+
+.shimmer-card {
+  height: 350px;
+  width: 250px;
+}
+
+.error-button {
+  color: #fff;
+  background-color: #ee750c;
+  border: none;
+  border-radius: 10px;
+}
+
+.error-button:active {
+  background-color: #ee750ce6;
+}
+
+.add-button {
+  min-width: 100px;
+}
+
+.cart {
+  min-height: 800px;
+}
+
+.single-cart-item {
+  min-height: 100px;
+  min-width: 500px;
+  box-shadow: 0 0 10px #d3d3d3;
+}
+
+.payment-box {
+  min-width: 500px;
+  max-height: 500px;
+  position: fixed;
+  top: 250px;
+  right: 80px;
+  box-shadow: 0 0 10px #d3d3d3;
+}
+
+/*# sourceMappingURL=index.c679fbae.css.map */
