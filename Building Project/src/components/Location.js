@@ -4,7 +4,7 @@ import useGeolocation from "../utils/useGeolocation"
 import { MANUAL_LOOCATION_API  , GEO_API_KEY} from "../config.js";
 import LocationContext from "../utils/LocationContext";
 import ModalContext from "../utils/ModalContext";
-import { clearCart } from "../utils/Redux/CartSlice";
+import { clearCart } from "../utils/Redux/cartSlice";
 import { useDispatch } from "react-redux";
 
 const Location = () => {
