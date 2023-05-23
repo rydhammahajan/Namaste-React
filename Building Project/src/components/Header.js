@@ -7,17 +7,11 @@ import LogIn from "./LogIn"
 import HeaderContext from "../utils/HeaderContext"
 const Header = () => {
 
-    const {location } = useContext(LocationContext) ; 
+    const {location  , setLocationModal } = useContext(LocationContext) ;
     const {isAuthenticated} = useIsAuthenticated() ; 
     const {logout} = useIsAuthenticated() ;
-    const {page , setPage} = useContext(HeaderContext) ; 
+    const {page } = useContext(HeaderContext) ; 
 
-    useEffect(() => {
-        // console.log(isAuthenticated);
-      }, [isAuthenticated]);
-
-    // if(!isAuthenticated) return <></>
-    
     return (
  
         <div 
@@ -41,11 +35,17 @@ const Header = () => {
 
                 <Link to = "/restaurants" className= {page.currentPage === "restaurants" ? "border-bottom border-dark pe-2" : undefined}><li><i className="fa-solid fa-utensils"></i> Restaurants</li></Link>
 
-                {/* <Link to = "/about"  className= {page.currentPage === "about" ? "border-bottom border-dark pe-2" : undefined}><li><i className="fa-solid fa-info"></i> About Us</li></Link> */}
-
                 <Link to = "/help" className= {page.currentPage === "help" ? "border-bottom border-dark pe-2" : undefined}><li><i className="fa-solid fa-question"></i> Help</li></Link>
 
                 <Link to = "/cart" className= {page.currentPage === "cart" ? "border-bottom border-dark pe-2" : undefined}><li><i className="fa-solid fa-cart-shopping"></i> Cart</li></Link>
+
+                {page.currentPage !== "home" && <button className="text-color border-0 px-3 bg-light rounded-1" onClick={()=>{
+
+                    setLocationModal({
+                        display : true 
+                    }) ;
+
+                }}>Set Location</button> }
 
                 {
                     isAuthenticated === true  ? <button className="text-color border-0 px-3 bg-light rounded-1" onClick={()=>{

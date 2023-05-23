@@ -19,6 +19,7 @@
   "homepage": "https://github.com/rydhammahajan/Namaste-React#readme",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-geocode": "^0.2.3",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@babel/core": "^7.21.4",
     "babel-plugin-transform-remove-console": "^6.9.4",
+    "buffer": "^5.7.1",
     "parcel": "^2.8.3",
     "process": "^0.11.10"
   }

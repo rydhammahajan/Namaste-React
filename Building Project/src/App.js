@@ -34,7 +34,7 @@ const AppLayout = () => {
     }) ;
 
     const [location, setLocation] = useState({
-        locationName : "" 
+        locationName : "" ,
     }) ;  
 
     const [locationModal , setLocationModal]  = useState({

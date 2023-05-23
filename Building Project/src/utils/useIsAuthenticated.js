@@ -22,13 +22,14 @@ const useIsAuthenticated = () => {
                         Authorization : `Bearer ${token}`
                     }
                 })
-                
+            
     
                 const response_json = await response?.json() ; 
                 
                 if(response_json?.status === "ok"){
                     setIsAuthenticated(true)
                 }else{
+                    localStorage.removeItem("USER")
                     setIsAuthenticated(false)
                     setLocation({
                         locationName : ""  })

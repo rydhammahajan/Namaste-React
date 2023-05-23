@@ -52,8 +52,9 @@ const Body = () => {
         const data = await fetch(`https://www.swiggy.com/dapi/restaurants/list/v5?lat=${locationCoords.lat}&lng=${locationCoords.long}&sortBy=${sortAnswer ? sortAnswer : "RELEVANCE"}&offset=10&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING`) ; 
 
         const json = await data.json();
-        setAllRestaurants(json.data.cards);
-        setFilteredRestaurants(json.data.cards)
+        setAllRestaurants(json?.data?.cards);
+        setFilteredRestaurants(json?.data?.cards)
+    
     }
 
     return ( 
@@ -65,9 +66,10 @@ const Body = () => {
 
             (
                 <>
-
+                
                 {locationModal.display && <Location/>}
                 <Carousel/>
+
                 
                 <div className="filter-section border-bottom  d-flex justify-content-between p-3 ">
                     
@@ -132,6 +134,11 @@ const Body = () => {
                 </div>
 
                 <div className = "d-flex justify-content-center p-5">
+
+                    {
+                        !filteredRestaurants && <h1 className="text-secondary fs-3">Oops! No Restaurant found in this location</h1>
+                    }
+                
 
                     {
                         filteredRestaurants?.length === 0 ? <h1>Oops! No Search Result.</h1> :
