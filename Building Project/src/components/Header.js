@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState} from "react"
 import {Link} from "react-router-dom" 
-import Logo from "../assets/logo.png"
+import Logo from "../assets/Logo.png"
 import LocationContext from "../utils/LocationContext"
 import useIsAuthenticated from "../utils/useIsAuthenticated"
 import LogIn from "./LogIn"
