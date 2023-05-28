@@ -8,6 +8,7 @@ import Location from "./Location";
 import { clearCart } from "../utils/Redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 import useIsAuthenticated from "../utils/useIsAuthenticated"
+import ModalContext from "../utils/ModalContext.js";
 
 const Cart = ()=>{
 
@@ -17,6 +18,7 @@ const Cart = ()=>{
     const totalCost = useSelector(store => store.cart.totalCost); 
     const dispatch = useDispatch() ;
     const {locationModal} = useContext(LocationContext)
+    const {modal , setModal} = useContext(ModalContext) ; 
     const {setPage} = useContext(HeaderContext) ;
     const {isAuthenticated} = useIsAuthenticated()
     const navigate = useNavigate() ;
@@ -76,7 +78,7 @@ const Cart = ()=>{
 
                 <div className="p-5 mx-5 d-flex flex-column gap-3">
 
-                <div className="d-flex gap-3 ">
+                <div className="d-flex gap-3 pb-5">
 
 
                     <div>
@@ -94,6 +96,24 @@ const Cart = ()=>{
                     <i className ="fa-solid fa-wallet text-secondary fs-1 ps-3"></i></span>
 
                     <span className="text-secondary fs-4 border-top pt-3 border-dark">Amount To Be Paid :  Rs. {totalCost}</span>
+
+                    <button className = "form-button fs-6 p-3 text-center"
+                    onClick={()=>{
+                        setModal({
+                            
+                            ...modal ,
+                            name : "afterPayment" , 
+                            heading : "Payment Successful",
+                            navigate : "" , 
+                            description : "Payment Successful😉" , 
+                            message : "" , 
+                            display : true 
+                        })
+                        setTimeout(()=>{
+                            HandleClearCart() ;
+                        } , 2000)
+                    }}
+                    >Proceed to Payment</button>
                     </div>
                 </div>
                 
