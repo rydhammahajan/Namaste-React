@@ -83,7 +83,7 @@ a{
 /*Home Page*/
 .home-top{
     background-image: url("../src/assets/homeBg.jpg");
-    background-size: cover;
+    background-size: 100% 100% ; 
     height : 600px ;
 }
 .explore-button{
