@@ -4,7 +4,7 @@
   "description": "Namaste React",
   "scripts": {
     "start": "parcel \"Building Project\"/src/index.html",
-    "build": "parcel \"Building Project\"/src/index.html",
+    "build": "parcel build \"Building Project\"/src/index.html",
     "test": "jest"
   },
   "repository": {
