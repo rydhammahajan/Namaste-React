@@ -21,6 +21,7 @@ import useIsAuthenticated from "./utils/useIsAuthenticated";
 import { Provider } from "react-redux";
 import store from "./utils/Redux/store";
 import HeaderContext from "./utils/HeaderContext";
+import LandscapeModeMessage from "./components/Landscape";
 
 const AppLayout = () => {
 
@@ -130,4 +131,15 @@ const appRouter = new createBrowserRouter([
 
 
 const root = ReactDOM.createRoot(document.getElementById("root")) ; 
-root.render(<RouterProvider router = {appRouter}/>) ;
+
+const handleResize = () => {
+    if (window.innerWidth <= 1200) {
+      root.render(<LandscapeModeMessage />);
+    } else {
+      root.render(<RouterProvider router={appRouter} />);
+    }
+  };
+  
+  window.addEventListener('resize', handleResize);
+  
+  handleResize(); // Initial render based on current window width

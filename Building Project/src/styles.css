@@ -3,9 +3,7 @@
     margin : 0 ; 
     padding : 0 ;
 }
-body{
-    min-width: 1200px; /*For responsiveness*/
-}
+
 .text-color{
     color:  rgb(238, 117, 12)  ;
 }
@@ -327,4 +325,14 @@ a{
     position: fixed ;
     top : 250px ;
     right : 80px
+}
+
+.landscape{
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: lightgray;
+}
+
+.landscape-image{
+    border-radius : 20px ;
 }
