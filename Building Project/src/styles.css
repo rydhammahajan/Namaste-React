@@ -81,9 +81,8 @@ a{
 /*Home Page*/
 .home-top{
     background-image: url("../src/assets/homeBg1.jpg");
-    background-size: 100% 100% ; 
     background-position: center;
-    background-repeat: no-repeat;
+    background-attachment: fixed;
     height : 600px ;
 }
 .explore-button{
