@@ -71,10 +71,10 @@ const Body = () => {
                 <Carousel/>
 
                 
-                <div className="filter-section border-bottom  d-flex justify-content-between p-3 ">
+                <div className="filter-section border-bottom  d-flex justify-content-between p-3 flex-column flex-lg-row">
                     
-                    <h1>Restaurants</h1>
-                    <div className="d-flex justify-content-end pt-3 gap-5">
+                    <h1 className="d-flex  justify-content-center justify-content-lg-start ">Restaurants</h1>
+                    <div className="d-flex  justify-content-center justify-content-lg-end pt-3 gap-5  flex-wrap">
 
                         <Link to = '/restaurants/RELEVANCE' className="text-dark" key = "relevance" onClick = {()=>{
                             setSortAnswer("RELEVANCE")
@@ -114,7 +114,7 @@ const Body = () => {
                 <div className="search-box d-flex justify-content-center p-5">
                     <input 
                     type = "text" 
-                    placeholder="Enter something to search ...." 
+                    placeholder="Enter something...." 
                     value = {inputText }
                     className="p-2 border rounded-1" 
                     onChange = { (e) => {

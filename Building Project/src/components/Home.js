@@ -40,17 +40,17 @@ const Home = () => {
             </div>
             <div className="d-flex flex-column pt-5 px-3  ">
                 <h1 className="text-famousRes">World Famous Restaurants</h1>
-                <div className="d-flex gap-5 p-5 flex-wrap justify-content-center">
-                <img src = {require("../assets/famousRes1.avif")} className="famousRes" height={"200px"}></img>
-                <img src = {require("../assets/famousRes2.avif")} className="famousRes" height={"200px"}></img>
-                <img src = {require("../assets/famousRes3.avif")} className="famousRes" height={"200px"}></img>
-                <img src = {require("../assets/famousRes4.avif")} className="famousRes" height={"200px"}></img>
+                <div className="d-flex gap-5 p-5 flex-wrap justify-content-center famousResImage ">
+                    <img src = {require("../assets/famousRes1.avif")} className="famousRes" height={"200px"}></img>
+                    <img src = {require("../assets/famousRes2.avif")} className="famousRes" height={"200px"}></img>
+                    <img src = {require("../assets/famousRes3.avif")} className="famousRes" height={"200px"}></img>
+                    <img src = {require("../assets/famousRes4.avif")} className="famousRes" height={"200px"}></img>
                 </div>
 
             </div>
             <div className="d-flex flex-column p-3 ">
                 <h1 className="text-famousRes">#FlavourFinders in Instagram</h1>
-                <div className="d-flex gap-5 p-5 flex-wrap justify-content-around">
+                <div className="d-flex gap-5 p-5 flex-wrap justify-content-around ">
                 <img src = {require("../assets/instafood1.png")} className="instaRes" height={"200px"}></img>
                 <img src = {require("../assets/instafood2.png")} className="instaRes" height={"200px"}></img>
                 <img src = {require("../assets/instafood3.png")} className="instaRes" height={"200px"}></img>

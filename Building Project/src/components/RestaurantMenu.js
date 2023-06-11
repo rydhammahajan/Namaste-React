@@ -34,9 +34,10 @@ const RestaurantMenu =  () => {
         } , [isAuthenticated])
     return !restaurantData ? (<Shimmer/>) : 
     (
-        <div className="p-5 d-flex flex-column gap-5 align-items-center">
+        <div className="p-2 py-5 d-flex flex-column gap-5 align-items-center">
             {locationModal.display && <Location/>}
-            <div className="d-flex p-3 justify-content-between  restaurant-menu-header">
+
+            <div className="d-flex  p-3 justify-content-between  restaurant-menu-header col-11 col-sm-8 ">
 
                 <div className="d-flex flex-column justify-content-center gap-1 ">
                     <span className="h1 fs-3">{name}</span>
@@ -52,10 +53,10 @@ const RestaurantMenu =  () => {
                     </span>
 
                 </div>
-                <img src = {IMG_CLOUD_LINK+ cloudinaryImageId} />
+                <img src = {IMG_CLOUD_LINK+ cloudinaryImageId} className="col-5 col-sm-3 col-md-2" />
             </div>
 
-            <div className="d-flex gap-5 fs-3 p-3 menu-header-detail  restaurant-menu-price justify-content-around ">
+            <div className="d-flex gap-5 fs-3 p-3 menu-header-detail  restaurant-menu-price justify-content-around col-12 col-sm-8">
                     <span>
                         <i className="fa-solid fa-clock"></i>
                         <span className="h1 fs-3"> {sla?.slaString}</span>

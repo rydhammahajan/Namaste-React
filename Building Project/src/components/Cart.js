@@ -68,7 +68,7 @@ const Cart = ()=>{
             <div className=" d-flex flex-column cart">
 
                 
-                <div className="d-flex justify-content-between text-light border-bottom py-4 px-4 position-sticky top-0 background-color" style={{zIndex : "5" }}>
+                <div className="d-flex justify-content-between text-light border-bottom py-4 px-4 position-sticky top-0 background-color">
                 <span className=" fs-1 h1">Cart Items <i className="fa-solid fa-cart-shopping"></i></span>
                 <button className="px-4 border-0 rounded-1 text-secondary" onClick = {()=>{
                     HandleClearCart() ; 
@@ -76,12 +76,12 @@ const Cart = ()=>{
                 </div>
 
 
-                <div className="p-5 mx-5 d-flex flex-column gap-3">
+                <div className="px-3 py-5  d-flex flex-column gap-5">
 
-                <div className="d-flex gap-3 pb-5">
+                <div className="d-flex gap-3 pb-5 flex-column-reverse align-items-center">
 
 
-                    <div>
+                    <div className="col-12 col-md-10">
                     {
                         cartItems?.map((cartItem)=>{
                             return <CartItem cartItem = {cartItem}/>
@@ -89,13 +89,13 @@ const Cart = ()=>{
                     }
                     </div>
 
-                    <div className="d-flex flex-column border align-items-center gap-4 p-3 payment-box">
+                    <div className="d-flex flex-column border align-items-center gap-4 p-3 payment-box col-12 col-md-10">
                     <span className="fs-3 h1">Want to Add more ?</span>
                     <Link to = "/restaurants"><button className = "form-button fs-5 p-3 text-center">Add more</button></Link>
                     <span><span className="fs-3 h1">Payment Info</span>
                     <i className ="fa-solid fa-wallet text-secondary fs-1 ps-3"></i></span>
 
-                    <span className="text-secondary fs-4 border-top pt-3 border-dark">Amount To Be Paid :  Rs. {totalCost}</span>
+                    <span className="text-secondary fs-4 border-top pt-3 border-dark text-center">Amount To Be Paid :  Rs. {totalCost}</span>
 
                     <button className = "form-button fs-6 p-3 text-center"
                     onClick={()=>{

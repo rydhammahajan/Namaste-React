@@ -131,21 +131,22 @@ const SignUp = () => {
 
         <>
         {modal.name === "afterSignUp" && modal.display === true && <Modal/>} 
-        <div className="d-flex justify-content-center align-items-center background-component">
+        <div className="d-flex justify-content-center align-items-center background-component ">
 
 
             
 
-            <div className="d-flex flex-column p-5 m-5 gap-2 signup-login-box justify-content-around ">
+            <div className="d-flex flex-column p-3 my-5 gap-2 signup-login-box justify-content-around col-11 col-sm-6 col-lg-5 col-xl-4 ">
 
-                <img className = "signup-login-right-side" src = {image}/>
+                <img className = "signup-login-right-side " src = {image}/>
 
-                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "100px" , right : "40px"}}>
-                    <span className="fs-4 text-light h1">Welcome</span>
-                    <span className="fs-4 text-light h1">to the planet of</span>
-                    <span className="h1 text-light" style={{fontSize : "45px"}}>Flavour Finders</span>
+                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "40px" , left : "40px"}}>
+                    <span className="fs-4 text-light ">Welcome</span>
+                    <span className="fs-4 text-light ">to the planet of</span>
+                    <span className="fs-2 h1 text-light" style={{fontSize : "45px"}}>Flavour Finders</span>
                 </div>
 
+                <div className="d-flex align-items-center py-5 px-2 gap-3 flex-column">
                 <h1 className=" text-color ">SignUp</h1>
 
                 <label className="fs-5 text-secondary">First Name<br/>
@@ -207,7 +208,7 @@ const SignUp = () => {
                 </label>
 
                 <label className="fs-5 text-secondary">Confirm Password<br/>
-                    <input type="password "  className = " mt-1 form-input"
+                    <input type="password"  className = " mt-1 form-input"
                     onChange = {(e)=>{
                         setConfirmPassword(e.target.value) ;
                         setIsConfirmPasswordDirty(true) ; 
@@ -228,6 +229,8 @@ const SignUp = () => {
 
                 <p className="fs-6 h1" >Already an existing user?  <Link to = "/login" className="text-color"><span>Login</span></Link></p>
 
+                </div>
+                
             </div>
         </div>
         </>

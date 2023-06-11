@@ -132,14 +132,16 @@ const appRouter = new createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root")) ; 
 
-const handleResize = () => {
-    if (window.innerWidth <= 1200) {
-      root.render(<LandscapeModeMessage />);
-    } else {
-      root.render(<RouterProvider router={appRouter} />);
-    }
-  };
+// const handleResize = () => {
+//     if (window.innerWidth <= 1200) {
+//       root.render(<LandscapeModeMessage />);
+//     } else {
+//       root.render(<RouterProvider router={appRouter} />);
+//     }
+//   };
   
-  window.addEventListener('resize', handleResize);
+//   window.addEventListener('resize', handleResize);
   
-  handleResize(); // Initial render based on current window width
+//   handleResize(); // Initial render based on current window width
+
+  root.render(<RouterProvider router={appRouter} />);

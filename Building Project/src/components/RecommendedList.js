@@ -3,7 +3,7 @@ import ManageCart from "./ManageCart";
 const RecommendedList = ({item}) => {
     const {isVeg , name , defaultPrice , price ,  description , imageId , id} = item || {};
     return (
-        <div className="d-flex py-3 px-5 justify-content-between restaurant-menu-section my-4 gap-5">
+        <div className="d-flex py-3 px-5 justify-content-between restaurant-menu-section my-4 gap-5 col-11 col-sm-10">
 
             <div className="d-flex flex-column justify-content-center ">
 
@@ -14,7 +14,7 @@ const RecommendedList = ({item}) => {
 
                 <span className="text-secondary"> Rs.{price ?  price/100 : defaultPrice /100 }</span>
 
-                <span className="text-secondary">{description}
+                <span className="text-secondary d-none d-sm-block " >{description}
                 </span>
 
             </div>

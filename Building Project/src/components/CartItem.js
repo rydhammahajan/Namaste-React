@@ -9,7 +9,7 @@ const CartItem = ({cartItem})=>{
     return (
 
 
-        <div className="d-flex justify-content-between px-5 py-2 my-2 gap-5 single-cart-item border align-items-center" key = {id}>
+        <div className="d-flex justify-content-between px-2 py-2 my-2 gap-5 single-cart-item border align-items-center col-12" key = {id} >
 
         <div className="d-flex flex-column ">
         <span className="fs-6">{name}</span>

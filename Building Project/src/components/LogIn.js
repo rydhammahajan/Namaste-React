@@ -105,16 +105,17 @@ const LogIn = () => {
 
             
 
-            <div className="d-flex flex-column p-5 gap-2 signup-login-box justify-content-around ">
+            <div className="d-flex flex-column p-3  my-5 gap-2 signup-login-box justify-content-around col-11 col-sm-6 col-lg-5 col-xl-4">
 
                 <img className = "signup-login-right-side" src = {image}/>
 
-                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "10px" , right : "40px"}}>
-                    <span className="fs-4 text-light h1">Welcome</span>
-                    <span className="fs-4 text-light h1">to the planet of</span>
-                    <span className="h1 text-light" style={{fontSize : "45px"}}>Flavour Finders</span>
+                <div className="d-flex flex-column position-absolute  p-3 " style={{top : "40px" , left : "40px"}}>
+                    <span className="fs-4 text-light ">Welcome</span>
+                    <span className="fs-4 text-light ">to the planet of</span>
+                    <span className="fs-2 h1 text-light" style={{fontSize : "45px"}}>Flavour Finders</span>
                 </div>
 
+                <div className="d-flex align-items-center py-5 gap-3 flex-column">
 
                 <h1 className=" text-color ">Login</h1>
 
@@ -157,6 +158,8 @@ const LogIn = () => {
                 onClick = {() => { SendLogInRequest() ;}} type = "submit">Submit</button>
 
                 <p className="fs-6 h1" >A new user?  <Link to = "/signup" className="text-color"><span>SignUp </span></Link></p>
+                </div>
+                
 
             </div>
         </div>

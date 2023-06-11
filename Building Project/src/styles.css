@@ -29,9 +29,16 @@ a{
 .nav-menu a li{
     color : black;
 }
+
+.nav-menu a{
+    width: max-content;
+}
+
 .nav-menu a li:hover{
     color : rgb(238, 117, 12) ;
 }
+
+
 
 /*SignUp LogIn Section*/
 .background-component{
@@ -42,17 +49,13 @@ a{
     background-attachment: fixed;
   
 }.signup-login-right-side{
-    position: absolute; 
-    height : 550px ;
-    width : 380px ;
-    right : 0px ;
+    
+    height : 400px ;
     border-radius : 10px ;
-
 }
 .signup-login-box{
     background-color: rgba(255, 255, 255 , 1);   
     border-radius: 20px;
-    width : 800px ;
     min-height : 520px ;
     position: relative;
 }
@@ -92,6 +95,9 @@ a{
 .explore-button:active{
     background-color: rgb(234, 155, 86) ;
 }
+.famousResImage img{
+    overflow: hidden;
+}
 .famousRes:hover{
     scale: 1.2;
     transition: all ease-in-out 1s;
@@ -111,12 +117,13 @@ a{
 
 /*User Info*/
 .location-background{
-    min-height : 100vh;
+    min-height : 100vh; 
     min-width: 100vw;
     background-color: rgba(211, 211, 211 , 0.8);
 }
 .user-form{
     border-radius: 20px !important;
+    width: inherit;
 }
 .options{
     border: none;
@@ -137,6 +144,7 @@ a{
 }
 
 /*Modal*/
+
 .modal{
     height: 100vh; 
     background-color: rgba(211, 211, 211 , 0.5);
@@ -146,6 +154,7 @@ a{
     max-width : 500px;
     border-radius : 10px ;
 }
+
 .fa-x{
     right : 30px ; 
     top : 20px ;
@@ -157,21 +166,13 @@ a{
 }
 .faq-header{
     background-color:rgb(79, 137, 165);
-    z-index : 4 ;
     width: 100%;
 }
-.faq-body{
-    width : 65% ;
+.faq-body , .faq-email{
     border-radius: 20px ;
     z-index: 1;
 }
-.faq-email{
-    width : 30% ;
-    border-radius: 20px ;
-    position: fixed;
-    right: 50px;
-    z-index: 3;
-}
+
 .faq-ques{
     background-color: rgba(211, 211, 211,0.2);
     border-radius: 10px;
@@ -257,14 +258,14 @@ a{
 .restaurant-menu-header{
     box-shadow: 0 0 10px lightgrey;
     border-radius: 10px;
-    width : 70%;
+    /* width : 70%; */
 }
 .restaurant-menu-price{
     width : 70%;
     box-shadow: 0 0 10px lightgrey;
 }
 .restaurant-menu-section{
-    width : 1000px;
+    /* width : 1000px; */
     box-shadow: 0 0 10px lightgrey;
 }
 
@@ -305,25 +306,16 @@ a{
     min-width : 100px ;
 }
 
-.cart{
-    min-height: 800px;
-}
+
 
 .single-cart-item{
 
-    min-height: 100px; 
-    min-width : 500px ;
     box-shadow: 0 0 10px lightgrey;
 }
 
 /*Payment*/
 .payment-box{
     box-shadow: 0 0 10px lightgrey;
-    min-width : 500px ; 
-    max-height : 500px ;
-    position: fixed ;
-    top : 250px ;
-    right : 80px
 }
 
 .landscape{

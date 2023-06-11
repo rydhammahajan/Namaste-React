@@ -116,15 +116,15 @@ const Location = () => {
 
     return (
 
-        <div className="position-fixed top-0 start-0" style={{zIndex : 10}}>
-            <div className="location-background d-flex justify-content-center align-items-center p-5">
+        <div className="position-fixed top-0 start-0 " style={{zIndex : 10}}>
+            <div className="location-background d-flex justify-content-center align-items-center">
 
-                <div className="user-form d-flex flex-column p-4 gap-5 align-items-center border rounded-1 ">
+                <div className="user-form d-flex flex-column p-4 gap-5 align-items-center border rounded-1">
 
                     <div className="fs-3 text-dark">Help us Locate You! </div>
 
 
-        <label className="fs-5 text-secondary">Location<br/>
+            <label className="fs-5 text-secondary">Location<br/>
 
             <input  className = " mt-1 px-2 form-input" value = {input} placeholder = "Choose one option...." required 
             disabled={OptionChoose === 2 ? false : true} 
@@ -156,7 +156,7 @@ const Location = () => {
         </label>
 
 
-        <div className="d-flex gap-2">
+        <div className="d-flex  flex-column flex-md-row gap-2">
             <button className = "form-button" 
                 onClick={()=>{ 
                         CurrentLocationAPI();
